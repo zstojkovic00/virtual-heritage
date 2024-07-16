@@ -1,7 +1,7 @@
 package com.zeljko.lego;
 
 import com.zeljko.lego.core.LegoActuator;
-import com.zeljko.lego.ui.LegoGUI;
+
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -17,9 +17,7 @@ public class Main {
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        LegoGUI gui = new LegoGUI(frame);
-        LegoActuator actuator = new LegoActuator(gui.getFrame());
-
+        LegoActuator actuator = new LegoActuator(frame);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -29,6 +27,5 @@ public class Main {
 
         frame.pack();
         frame.setVisible(true);
-        actuator.start();
     }
 }

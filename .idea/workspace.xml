@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/lego.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +52,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder",
+    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,10 +67,13 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/resources/images" />
+      <recent name="$PROJECT_DIR$/src/main/java/resources/textures" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/textures" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/resources/textures/images" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -181,7 +179,7 @@
       <workItem from="1719214323184" duration="42000" />
       <workItem from="1720899654973" duration="7194000" />
       <workItem from="1720960816938" duration="263000" />
-      <workItem from="1720971957244" duration="9527000" />
+      <workItem from="1720971957244" duration="18103000" />
     </task>
     <servers />
   </component>

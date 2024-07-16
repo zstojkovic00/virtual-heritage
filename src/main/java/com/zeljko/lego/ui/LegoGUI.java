@@ -3,15 +3,22 @@ package com.zeljko.lego.ui;
 import lombok.Getter;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+@Getter
 public class LegoGUI {
-    @Getter
+
     private JFrame frame;
-    private JPanel windowPanel, topPanel, bottomPanel;
-    private JButton removeButton, addButton, finishButton, quitButton, helpButton, newGameButton;
-    private JCheckBox lightOnOff, ambientLight, globalAmbientLight, specularLight, diffuseLight;
-    private JLabel label;
+    private JPanel legoFigures;
+    private JMenuBar menuBar;
+
+    private static final int BRICK_SIZE = 120;
+    private static final Color NORMAL_COLOR = new Color(200, 200, 200);
+    private static final Color HOVER_COLOR = new Color(100, 100, 100);
+    private static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
 
     public LegoGUI(JFrame frame) {
         this.frame = frame;
@@ -19,47 +26,55 @@ public class LegoGUI {
     }
 
     private void initUI() {
-        windowPanel = new JPanel(new GridLayout(2, 1));
-        topPanel = new JPanel();
-        bottomPanel = new JPanel();
+        menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem newGameItem = new JMenuItem("New Game");
+        JMenuItem exitItem = new JMenuItem("Exit");
 
-        // Initialize buttons
-        removeButton = new JButton("Remove");
-        addButton = new JButton("Add");
-        finishButton = new JButton("Finish");
-        quitButton = new JButton("Quit");
-        helpButton = new JButton("Help");
-        newGameButton = new JButton("New Game");
+        fileMenu.add(newGameItem);
+        fileMenu.add(exitItem);
+        menuBar.add(fileMenu);
 
-        // Initialize checkboxes
-        lightOnOff = new JCheckBox("Turn Light On/Off", true);
-        ambientLight = new JCheckBox("Ambient Light", false);
-        globalAmbientLight = new JCheckBox("Global Ambient Light", false);
-        specularLight = new JCheckBox("Specular Light", false);
-        diffuseLight = new JCheckBox("Diffuse Light", false);
+        legoFigures = new JPanel(new GridLayout(4, 2, 10, 10));
+        legoFigures.setBackground(BACKGROUND_COLOR);
+        legoFigures.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Initialize label
-        label = new JLabel("Click On The Help Button To Read Game Instructions");
-
-        // Add components to panels
-        topPanel.add(removeButton);
-        topPanel.add(addButton);
-        topPanel.add(finishButton);
-        topPanel.add(quitButton);
-        topPanel.add(helpButton);
-        topPanel.add(newGameButton);
-        topPanel.add(lightOnOff);
-        topPanel.add(ambientLight);
-        topPanel.add(globalAmbientLight);
-        topPanel.add(specularLight);
-        topPanel.add(diffuseLight);
-
-        bottomPanel.add(label);
-
-        windowPanel.add(topPanel);
-        windowPanel.add(bottomPanel);
-
-        frame.add(windowPanel, BorderLayout.SOUTH);
+        for (int i = 0; i < 8; i++) {
+            JPanel legoPanel = createLegoPanel(resizeImage());
+            legoFigures.add(legoPanel);
+        }
     }
 
+    private JPanel createLegoPanel(ImageIcon image) {
+        JPanel legoPanel = new JPanel();
+
+        JLabel imageLabel = new JLabel(image);
+        legoPanel.add(imageLabel, BorderLayout.CENTER);
+        legoPanel.setBorder(BorderFactory.createLineBorder(NORMAL_COLOR, 2));
+
+        legoPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                legoPanel.setBorder(BorderFactory.createLineBorder(HOVER_COLOR, 2));
+                legoPanel.revalidate();
+                legoPanel.repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                legoPanel.setBorder(BorderFactory.createLineBorder(NORMAL_COLOR, 2));
+                legoPanel.revalidate();
+                legoPanel.repaint();
+            }
+        });
+
+        return legoPanel;
+    }
+
+    private ImageIcon resizeImage() {
+        ImageIcon originalIcon = new ImageIcon("src/main/java/resources/images/lego.png");
+        Image originalImage = originalIcon.getImage();
+        Image resizedImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+    }
 }
