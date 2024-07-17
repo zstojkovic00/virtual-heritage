@@ -3,16 +3,23 @@ package com.zeljko.lego.core;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.zeljko.lego.graphics.Face;
+import com.zeljko.lego.graphics.Model;
+import com.zeljko.lego.graphics.OBJLoader;
+import com.zeljko.lego.graphics.math.Vector3f;
 import com.zeljko.lego.ui.LegoGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class LegoActuator implements GLEventListener {
     private GLCanvas canvas;
     private FPSAnimator animator;
     private LegoGUI gui;
     private JFrame frame;
+
+    private Model model;
 
     public LegoActuator(JFrame frame) {
         this.frame = frame;
@@ -58,41 +65,31 @@ public class LegoActuator implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
+        setupLighting(gl);
+        loadModel();
+    }
 
-        gl.glClearColor(0.95f, 0.95f, 1f, 0);
-
-        gl.glEnable(GL2.GL_DEPTH_TEST); // enable the depth buffer to allow us to represent depth information in 3d space
-        gl.glEnable(GL2.GL_LIGHTING); // enable lighting calculation
-        gl.glEnable(GL2.GL_LIGHT0); // initial value for light (1,1,1,1) -> RGBA
+    private void setupLighting(GL2 gl) {
+        gl.glEnable(GL2.GL_DEPTH_TEST);
+        gl.glEnable(GL2.GL_LIGHTING);
+        gl.glEnable(GL2.GL_LIGHT0);
         gl.glEnable(GL2.GL_NORMALIZE);
 
-        gl.glEnable(GL2.GL_COLOR_MATERIAL);
-        gl.glLightModeli(GL2.GL_LIGHT_MODEL_TWO_SIDE, 1);
-        gl.glMateriali(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 100);
-
-
-        // initialize different light sources
         float[] ambient = {0.1f, 0.1f, 0.1f, 1f};
         float[] diffuse = {1f, 1f, 1f, 1f};
         float[] specular = {1.0f, 1.0f, 1.0f, 1.0f};
 
-        // configure different light sources
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambient, 0);
-        gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_DIFFUSE, diffuse, 0);
-        gl.glLightfv(GL2.GL_LIGHT2, GL2.GL_SPECULAR, specular, 0);
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuse, 0);
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_SPECULAR, specular, 0);
+    }
 
-        gl.glClearDepth(1.0f); // set clear depth value to farthest
-        gl.glEnable(GL2.GL_DEPTH_TEST); // enable depth testing
-        gl.glDepthFunc(GL2.GL_LEQUAL); // the type of depth test to do
-        // perspective correction
-        gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
-        gl.glShadeModel(GL2.GL_SMOOTH); // blend colors nicely & have smooth lighting
-
-        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-
-
-        // load your own 3d model:
-
+    private void loadModel() {
+        try {
+            model = OBJLoader.loadModel(new File("src/main/java/resources/textures/LegoBricks3.obj"));
+        } catch (Exception e) {
+            System.out.println("Error loading model: " + e.getMessage());
+        }
     }
 
     @Override
@@ -103,6 +100,28 @@ public class LegoActuator implements GLEventListener {
     public void display(GLAutoDrawable glAutoDrawable) {
         GL2 gl = glAutoDrawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+
+        if (model != null) {
+            gl.glBegin(GL2.GL_TRIANGLES);
+            gl.glColor3f(1.0f, 0.0f, 0.0f);
+            for (Face face : model.faces) {
+                Vector3f n1 = model.normals.get((int) face.normal.x - 1);
+                gl.glNormal3f(n1.x, n1.y, n1.z);
+                Vector3f v1 = model.vertices.get((int) face.vertex.x - 1);
+                gl.glVertex3f(v1.x, v1.y, v1.z);
+
+                Vector3f n2 = model.normals.get((int) face.normal.y - 1);
+                gl.glNormal3f(n2.x, n2.y, n2.z);
+                Vector3f v2 = model.vertices.get((int) face.vertex.y - 1);
+                gl.glVertex3f(v2.x, v2.y, v2.z);
+
+                Vector3f n3 = model.normals.get((int) face.normal.z - 1);
+                gl.glNormal3f(n3.x, n3.y, n3.z);
+                Vector3f v3 = model.vertices.get((int) face.vertex.z - 1);
+                gl.glVertex3f(v3.x, v3.y, v3.z);
+            }
+            gl.glEnd();
+        }
     }
 
     @Override
