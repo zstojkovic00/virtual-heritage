@@ -58,7 +58,41 @@ public class LegoActuator implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
-        gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+        gl.glClearColor(0.95f, 0.95f, 1f, 0);
+
+        gl.glEnable(GL2.GL_DEPTH_TEST); // enable the depth buffer to allow us to represent depth information in 3d space
+        gl.glEnable(GL2.GL_LIGHTING); // enable lighting calculation
+        gl.glEnable(GL2.GL_LIGHT0); // initial value for light (1,1,1,1) -> RGBA
+        gl.glEnable(GL2.GL_NORMALIZE);
+
+        gl.glEnable(GL2.GL_COLOR_MATERIAL);
+        gl.glLightModeli(GL2.GL_LIGHT_MODEL_TWO_SIDE, 1);
+        gl.glMateriali(GL2.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 100);
+
+
+        // initialize different light sources
+        float[] ambient = {0.1f, 0.1f, 0.1f, 1f};
+        float[] diffuse = {1f, 1f, 1f, 1f};
+        float[] specular = {1.0f, 1.0f, 1.0f, 1.0f};
+
+        // configure different light sources
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambient, 0);
+        gl.glLightfv(GL2.GL_LIGHT1, GL2.GL_DIFFUSE, diffuse, 0);
+        gl.glLightfv(GL2.GL_LIGHT2, GL2.GL_SPECULAR, specular, 0);
+
+        gl.glClearDepth(1.0f); // set clear depth value to farthest
+        gl.glEnable(GL2.GL_DEPTH_TEST); // enable depth testing
+        gl.glDepthFunc(GL2.GL_LEQUAL); // the type of depth test to do
+        // perspective correction
+        gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
+        gl.glShadeModel(GL2.GL_SMOOTH); // blend colors nicely & have smooth lighting
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+
+
+        // load your own 3d model:
+
     }
 
     @Override
