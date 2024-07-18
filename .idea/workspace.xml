@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Initialize OpenGL settings for 3D rendering">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Face.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Model.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/OBJLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/math/Vector2f.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/math/Vector3f.java" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Load your own 3d model with custom parser for .obj file">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/Shape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/lego-back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/lego-side.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/lego-up.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/LegoBricks3.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/brick_2x2.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Face.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/OBJLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/math/Vector3f.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +59,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures",
+    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,8 +77,8 @@
       <recent name="com.zeljko.lego.graphics" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/resources/textures" />
       <recent name="$PROJECT_DIR$/src/main/java/resources/images" />
+      <recent name="$PROJECT_DIR$/src/main/java/resources/textures" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/textures" />
     </key>
@@ -188,7 +191,8 @@
       <workItem from="1720899654973" duration="7194000" />
       <workItem from="1720960816938" duration="263000" />
       <workItem from="1720971957244" duration="18588000" />
-      <workItem from="1721241835161" duration="6976000" />
+      <workItem from="1721241835161" duration="7427000" />
+      <workItem from="1721335577454" duration="5114000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
@@ -206,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721244220600</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Load your own 3d model with custom parser for .obj file">
+      <option name="closed" value="true" />
+      <created>1721252698509</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721252698509</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +227,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial working version" />
     <MESSAGE value="Initialize OpenGL settings for 3D rendering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialize OpenGL settings for 3D rendering" />
+    <MESSAGE value="Load your own 3d model with custom parser for .obj file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load your own 3d model with custom parser for .obj file" />
   </component>
 </project>
