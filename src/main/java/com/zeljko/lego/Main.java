@@ -1,16 +1,18 @@
 package com.zeljko.lego;
 
 import com.zeljko.lego.core.LegoActuator;
+import com.zeljko.lego.utils.Constants;
 
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static com.zeljko.lego.utils.Constants.WINDOW_HEIGHT;
+import static com.zeljko.lego.utils.Constants.WINDOW_WIDTH;
+
 public class Main {
 
-    private static final int WINDOW_WIDTH = 1000;
-    private static final int WINDOW_HEIGHT = 562;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Lego Builder");

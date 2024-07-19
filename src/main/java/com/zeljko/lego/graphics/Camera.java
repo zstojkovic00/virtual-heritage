@@ -1,9 +1,12 @@
-package com.zeljko.lego.core;
+package com.zeljko.lego.graphics;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
 
 public class Camera {
+    private int windowWidth;
+    private int windowHeight;
+    private int currentAngleOfVisibleField;
 
     // look from camera (X,Y,Z) - Position
     private double eyeX = 0;
@@ -38,6 +41,41 @@ public class Camera {
 
     // access openGL utilities libraries like volume,...
     private GLU glu;
+
+
+    public Camera(int windowWidth, int windowHeight) {
+        this.glu = new GLU();
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        this.currentAngleOfVisibleField = 55;
+    }
+
+
+    public void setupViewport(GL2 gl) {
+        gl.glViewport(windowWidth / 8, 0, windowWidth, windowHeight);
+    }
+
+    public void setupProjection(GL2 gl) {
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
+        glu.gluPerspective(currentAngleOfVisibleField,
+                1.f * windowWidth / windowHeight, 1, 100);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
+    }
+
+    public void setObserver() {
+        glu.gluLookAt(-1, 2, 10.0, // look from camera XYZ
+                0.0, 0.0, 0.0, // look at the origin
+                0.0, 1.0, 0.0); // positive Y up vector
+    }
+
+    public void zoom(int amount) {
+        currentAngleOfVisibleField += amount;
+        if (currentAngleOfVisibleField < 10) currentAngleOfVisibleField = 10;
+        if (currentAngleOfVisibleField > 175) currentAngleOfVisibleField = 175;
+    }
+
 
     // sets the limit of the view scene
     private void setLimit(double xMin, double xMax,
