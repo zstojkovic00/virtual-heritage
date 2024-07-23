@@ -9,8 +9,6 @@ import com.zeljko.lego.graphics.Light;
 
 import com.zeljko.lego.ui.LegoGUI;
 
-import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,14 +19,11 @@ import static com.zeljko.lego.utils.Constants.WINDOW_WIDTH;
 public class LegoActuator implements GLEventListener {
     private LegoGUI gui;
     private final Camera camera;
-    private final LegoModel legoModel;
     private final InputHandler inputHandler;
     private final Light lightingManager;
     private GLCanvas canvas;
     private FPSAnimator animator;
 
-    @Setter
-    private boolean shouldDrawLegoBrick = false;
 
     public LegoActuator(JFrame frame) {
         GLProfile profile = GLProfile.getDefault();
@@ -39,18 +34,18 @@ public class LegoActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.lightingManager = new Light();
-        this.legoModel = new LegoModel(5.0, 1.5, 2.0);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
-        inputHandler = new InputHandler(legoModel, 0.1);
+        inputHandler = new InputHandler(this, 0.1);
 
         SwingUtilities.invokeLater(() -> {
             canvas = new GLCanvas(caps);
             canvas.setPreferredSize(new Dimension(1000, 562));
             canvas.addGLEventListener(this);
             canvas.addKeyListener(inputHandler);
+
             animator = new FPSAnimator(canvas, 60);
 
-            gui = new LegoGUI(frame, this::setShouldDrawLegoBrick);
+            gui = new LegoGUI(frame, inputHandler);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
             frame.add(gui.getLegoFigures(), BorderLayout.SOUTH);
@@ -76,7 +71,7 @@ public class LegoActuator implements GLEventListener {
     public void init(GLAutoDrawable drawable) {
 
         GL2 gl = drawable.getGL().getGL2();
-        gl.glClearColor(0.95f, 0.95f, 1f, 0);
+        gl.glClearColor(0, 0, 0, 0);
 
         lightingManager.setupLighting(gl);
         GLU.createGLU(gl);
@@ -91,8 +86,9 @@ public class LegoActuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.setObserver();
 
-        if (shouldDrawLegoBrick) {
-            legoModel.draw(gl);
+
+        for (LegoModel model : inputHandler.getLegoModels()) {
+            model.draw(gl);
         }
 
         camera.apply(gl);

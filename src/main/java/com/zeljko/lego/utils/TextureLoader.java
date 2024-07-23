@@ -5,7 +5,6 @@ import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.awt.ImageUtil;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
-import lombok.Getter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,12 +14,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TextureLoader {
-
     private static final String[] textureFileNames = {
             "lego-side.png"
     };
 
-    @Getter
     private static Texture[] textures;
 
     public static void loadTextures(GL2 gl) {
@@ -30,10 +27,8 @@ public class TextureLoader {
         for (int i = 0; i < textureFileNames.length; i++) {
             try {
                 Path path = Paths.get("src/main/java/resources/textures/" + textureFileNames[i]);
-                System.out.println("Attempting to load texture from: " + path.toAbsolutePath());
 
                 if (Files.exists(path)) {
-                    System.out.println("File exists. Loading...");
                     BufferedImage image = ImageIO.read(path.toFile());
                     ImageUtil.flipImageVertically(image);
 

@@ -1,17 +1,12 @@
 package com.zeljko.lego.ui;
 
-import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.function.Consumer;
+import java.awt.event.*;
 
-@Getter
 public class LegoGUI {
-
     private JFrame frame;
     private JPanel legoFigures;
     private JMenuBar menuBar;
@@ -21,12 +16,12 @@ public class LegoGUI {
     private static final Color HOVER_COLOR = new Color(100, 100, 100);
     private static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
 
-    public LegoGUI(JFrame frame, Consumer<Boolean> onClick) {
+    public LegoGUI(JFrame frame, ActionListener actionListener) {
         this.frame = frame;
-        initUI(onClick);
+        initUI(actionListener);
     }
 
-    private void initUI(Consumer<Boolean> onClick) {
+    private void initUI(ActionListener actionListener) {
         menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem newGameItem = new JMenuItem("New Game");
@@ -41,13 +36,17 @@ public class LegoGUI {
         legoFigures.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 
-        JPanel legoRectangle = createLegoPanel(resizeImage("src/main/java/resources/images/lego-rectangle.png", 150, 150), "N", onClick);
-        JPanel legoCylinder = createLegoPanel(resizeImage("src/main/java/resources/images/lego-cylinder.png", 225, 135), "N", onClick);
+        JPanel legoRectangle = createLegoPanel(resizeImage("src/main/java/resources/images/lego-rectangle.png",
+                150, 150), "N", actionListener, "rectangle");
+
+        JPanel legoCylinder = createLegoPanel(resizeImage("src/main/java/resources/images/lego-cylinder.png",
+                225, 135), "N", actionListener, "cylinder");
+
         legoFigures.add(legoRectangle);
         legoFigures.add(legoCylinder);
     }
 
-    private JPanel createLegoPanel(ImageIcon image, String number, Consumer<Boolean> onClick) {
+    private JPanel createLegoPanel(ImageIcon image, String number, ActionListener actionListener, String type) {
         JPanel legoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         JLabel imageLabel = new JLabel(image);
@@ -72,12 +71,12 @@ public class LegoGUI {
                 legoPanel.revalidate();
                 legoPanel.repaint();
             }
+        });
 
+        legoPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("test");
-                onClick.accept(true);
-
+                actionListener.actionPerformed(new ActionEvent(legoPanel, ActionEvent.ACTION_PERFORMED, type));
             }
         });
 
@@ -89,5 +88,29 @@ public class LegoGUI {
         Image originalImage = originalIcon.getImage();
         Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public JPanel getLegoFigures() {
+        return legoFigures;
+    }
+
+    public void setLegoFigures(JPanel legoFigures) {
+        this.legoFigures = legoFigures;
+    }
+
+    public JMenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    public void setMenuBar(JMenuBar menuBar) {
+        this.menuBar = menuBar;
     }
 }

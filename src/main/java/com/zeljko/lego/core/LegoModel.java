@@ -13,6 +13,15 @@ public class LegoModel {
     private int rotationX;
     private int rotationY;
     private float scale;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public LegoModel(double width, double height, double depth) {
         this.width = width;
