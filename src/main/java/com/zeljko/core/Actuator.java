@@ -1,31 +1,31 @@
-package com.zeljko.lego.core;
+package com.zeljko.core;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.zeljko.lego.graphics.Camera;
-import com.zeljko.lego.graphics.Light;
+import com.zeljko.graphics.Camera;
+import com.zeljko.graphics.Light;
 
-import com.zeljko.lego.ui.LegoGUI;
+import com.zeljko.graphics.Model3D;
+import com.zeljko.ui.Gui;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-import static com.zeljko.lego.utils.Constants.WINDOW_HEIGHT;
-import static com.zeljko.lego.utils.Constants.WINDOW_WIDTH;
+import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
+import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 
-public class LegoActuator implements GLEventListener {
-    private LegoGUI gui;
+public class Actuator implements GLEventListener {
+    private Gui gui;
     private final Camera camera;
-    private final InputHandler inputHandler;
-    private final Light lightingManager;
+    private final InputListener inputListener;
+    private final Light light;
     private GLCanvas canvas;
     private FPSAnimator animator;
 
-
-    public LegoActuator(JFrame frame) {
+    public Actuator(JFrame frame) {
         GLProfile profile = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(profile);
         caps.setAlphaBits(8);
@@ -33,22 +33,22 @@ public class LegoActuator implements GLEventListener {
         caps.setDoubleBuffered(true);
         caps.setStencilBits(8);
 
-        this.lightingManager = new Light();
+        this.light = new Light();
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
-        inputHandler = new InputHandler(this, 0.1);
+        inputListener = new InputListener();
 
         SwingUtilities.invokeLater(() -> {
             canvas = new GLCanvas(caps);
             canvas.setPreferredSize(new Dimension(1000, 562));
             canvas.addGLEventListener(this);
-            canvas.addKeyListener(inputHandler);
+            canvas.addKeyListener(inputListener);
 
             animator = new FPSAnimator(canvas, 60);
 
-            gui = new LegoGUI(frame, inputHandler);
+            gui = new Gui(frame, inputListener);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
-            frame.add(gui.getLegoFigures(), BorderLayout.SOUTH);
+            frame.add(gui.getPanel(), BorderLayout.SOUTH);
 
 
             camera.lookAt(-5, 0, 3,
@@ -69,11 +69,10 @@ public class LegoActuator implements GLEventListener {
 
     @Override
     public void init(GLAutoDrawable drawable) {
-
         GL2 gl = drawable.getGL().getGL2();
         gl.glClearColor(0, 0, 0, 0);
 
-        lightingManager.setupLighting(gl);
+        light.setupLighting(gl);
         GLU.createGLU(gl);
     }
 
@@ -86,9 +85,8 @@ public class LegoActuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.setObserver();
 
-
-        for (LegoModel model : inputHandler.getLegoModels()) {
-            model.draw(gl);
+        for (Model3D model3D : inputListener.getModels()) {
+            model3D.draw(gl);
         }
 
         camera.apply(gl);

@@ -1,25 +1,22 @@
-package com.zeljko.lego;
+package com.zeljko;
 
-import com.zeljko.lego.core.LegoActuator;
-import com.zeljko.lego.utils.Constants;
+import com.zeljko.core.Actuator;
+import com.zeljko.utils.Constants;
 
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static com.zeljko.lego.utils.Constants.WINDOW_HEIGHT;
-import static com.zeljko.lego.utils.Constants.WINDOW_WIDTH;
-
 public class Main {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Lego Builder");
-        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        JFrame frame = new JFrame("Virtual Heritage");
+        frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        LegoActuator actuator = new LegoActuator(frame);
+        Actuator actuator = new Actuator(frame);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

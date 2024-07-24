@@ -1,7 +1,6 @@
-package com.zeljko.lego.graphics;
+package com.zeljko.graphics;
 
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.util.texture.Texture;
 
 public class Shape {
 

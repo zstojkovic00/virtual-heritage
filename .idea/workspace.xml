@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Complete refactoring of code">
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Implement logic to select lego model of choice">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/InputHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/utils/TextureLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/utils/TextureLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/InputHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/core/LegoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Model3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Light.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/graphics/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/ui/LegoGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/lego/utils/TextureLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/images/lego-cylinder.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/images/cylinder.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/images/lego-rectangle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/images/rectangle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/textures/lego-side.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,34 +48,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OpenGLSquare.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OpenGLTriangle.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Project.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ogl2.exam.Project.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.LegoBuilder [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.lego-builder [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.OpenGLSquare.executor": "Run",
+    "Application.OpenGLTriangle.executor": "Run",
+    "Application.Project.executor": "Run",
+    "Application.com.zeljko.Main.executor": "Run",
+    "Application.ogl2.exam.Project.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.LegoBuilder [clean,install].executor": "Run",
+    "Maven.lego-builder [clean,install].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.zeljko.lego.graphics" />
@@ -88,30 +98,17 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.com.zeljko.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.zeljko.lego.Main" />
-      <module name="lego-builder" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OpenGLSquare" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ogl2.practice.OpenGLSquare" />
-      <module name="lego-builder" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.textures.ogl2.practice.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="virtual-heritage" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="OpenGLTriangle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.textures.ogl2.practice.OpenGLTriangle" />
-      <module name="lego-builder" />
+      <module name="virtual-heritage" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.textures.ogl2.practice.*" />
@@ -124,7 +121,7 @@
     </configuration>
     <configuration name="Project" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.textures.ogl2.exam.Project" />
-      <module name="lego-builder" />
+      <module name="virtual-heritage" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.textures.ogl2.exam.*" />
@@ -135,9 +132,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.zeljko.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.zeljko.Main" />
+      <module name="virtual-heritage" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zeljko.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ogl2.exam.Project" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ogl2.exam.Project" />
-      <module name="lego-builder" />
+      <module name="virtual-heritage" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ogl2.exam.*" />
@@ -148,13 +158,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="virtual-heritage" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="virtual-heritage" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.com.zeljko.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.ogl2.exam.Project" />
         <item itemvalue="Application.Project" />
         <item itemvalue="Application.OpenGLTriangle" />
-        <item itemvalue="Application.OpenGLSquare" />
       </list>
     </recent_temporary>
   </component>
@@ -191,7 +214,7 @@
       <workItem from="1721413635680" duration="4707000" />
       <workItem from="1721423017144" duration="8314000" />
       <workItem from="1721602773689" duration="3000000" />
-      <workItem from="1721775886782" duration="2337000" />
+      <workItem from="1721775886782" duration="4483000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
@@ -233,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721431733940</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Implement logic to select lego model of choice">
+      <option name="closed" value="true" />
+      <created>1721778230006</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721778230006</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +276,7 @@
     <MESSAGE value="Load your own 3d model with custom parser for .obj file" />
     <MESSAGE value="Add camera and shape class" />
     <MESSAGE value="Complete refactoring of code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete refactoring of code" />
+    <MESSAGE value="Implement logic to select lego model of choice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement logic to select lego model of choice" />
   </component>
 </project>

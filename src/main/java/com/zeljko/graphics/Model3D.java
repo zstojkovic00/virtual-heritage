@@ -1,9 +1,8 @@
-package com.zeljko.lego.core;
+package com.zeljko.graphics;
 
 import com.jogamp.opengl.GL2;
-import com.zeljko.lego.graphics.Shape;
 
-public class LegoModel {
+public class Model3D {
     private double width;
     private double height;
     private double depth;
@@ -23,7 +22,7 @@ public class LegoModel {
         isSelected = selected;
     }
 
-    public LegoModel(double width, double height, double depth) {
+    public Model3D(double width, double height, double depth) {
         this.width = width;
         this.height = height;
         this.depth = depth;
