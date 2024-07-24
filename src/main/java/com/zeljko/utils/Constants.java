@@ -8,5 +8,5 @@ public class Constants {
     public static final float UNIT_MOVEMENT = 0.1F;
     public static final Color BLACK = new Color(100, 100, 100);
     public static final Color GRAY = new Color(200, 200, 200);
-    public static final String IMAGE_PATH = "src/main/java/resources/images/rectangle.png";
+    public static final String IMAGE_PATH = "src/main/java/resources/images/";
 }

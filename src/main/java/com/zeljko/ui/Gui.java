@@ -1,6 +1,8 @@
 package com.zeljko.ui;
 
 
+import com.zeljko.utils.ShapeType;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -12,7 +14,6 @@ public class Gui {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
-
 
     public Gui(JFrame frame, ActionListener actionListener) {
         this.frame = frame;
@@ -33,11 +34,11 @@ public class Gui {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 
-        JPanel rectangle = createPanel(resizeImage(IMAGE_PATH,
-                150, 150), actionListener, "rectangle");
+        JPanel rectangle = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.RECTANGLE),
+                150, 150), actionListener, ShapeType.RECTANGLE.name());
 
-        JPanel cylinder = createPanel(resizeImage(IMAGE_PATH,
-                225, 135), actionListener, "cylinder");
+        JPanel cylinder = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CYLINDER),
+                225, 135), actionListener, ShapeType.CYLINDER.name());
 
         panel.add(rectangle);
         panel.add(cylinder);
@@ -81,6 +82,10 @@ public class Gui {
         Image originalImage = originalIcon.getImage();
         Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
+    }
+
+    public String createImagePath(String path, ShapeType type) {
+        return path + type.name().toLowerCase() + ".png";
     }
 
     public JFrame getFrame() {
