@@ -1,6 +1,7 @@
 package com.zeljko.core;
 
 import com.zeljko.graphics.Model3D;
+import com.zeljko.utils.ShapeType;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -84,7 +85,9 @@ public class InputListener implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         Model3D newModel;
         String type = e.getActionCommand();
-        if ("rectangle".equals(type)) {
+        System.out.println(type);
+
+        if (ShapeType.RECTANGLE.name().equalsIgnoreCase(type)) {
             newModel = new Model3D(5.0, 1.5, 2.0);
         } else {
             System.out.println("Not implemented yet");

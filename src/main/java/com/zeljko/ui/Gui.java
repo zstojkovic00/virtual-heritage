@@ -1,6 +1,7 @@
 package com.zeljko.ui;
 
 
+import com.zeljko.core.Actuator;
 import com.zeljko.utils.ShapeType;
 
 import javax.swing.*;
@@ -14,9 +15,11 @@ public class Gui {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
+    private Actuator actuator;
 
-    public Gui(JFrame frame, ActionListener actionListener) {
+    public Gui(JFrame frame, ActionListener actionListener, Actuator actuator) {
         this.frame = frame;
+        this.actuator = actuator;
         initUI(actionListener);
     }
 
@@ -25,10 +28,21 @@ public class Gui {
         JMenu fileMenu = new JMenu("File");
         JMenuItem newGameItem = new JMenuItem("New Game");
         JMenuItem exitItem = new JMenuItem("Exit");
+        JButton checkAlignmentButton = new JButton("Check Alignment");
 
         fileMenu.add(newGameItem);
         fileMenu.add(exitItem);
         menuBar.add(fileMenu);
+
+
+        checkAlignmentButton.addActionListener(e -> {
+            boolean aligned = actuator.checkAlignment();
+            JOptionPane.showMessageDialog(frame,
+                    aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned!",
+                    "Alignment Check",
+                    aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
+        });
+
 
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -42,6 +56,7 @@ public class Gui {
 
         panel.add(rectangle);
         panel.add(cylinder);
+        panel.add(checkAlignmentButton);
     }
 
     private JPanel createPanel(ImageIcon image, ActionListener actionListener, String type) {

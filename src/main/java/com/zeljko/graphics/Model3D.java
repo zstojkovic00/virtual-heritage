@@ -45,25 +45,60 @@ public class Model3D {
         this.rotationY += y;
     }
 
-    public void scale(float factor) {
-        this.scale *= factor;
-    }
-
     public void draw(GL2 gl) {
 
         gl.glPushMatrix();
 
-            gl.glTranslated(translateX, translateY, translateZ);
-            gl.glScalef(scale, scale, scale);
-            gl.glRotated(rotationX, 1, 0, 0);
-            gl.glRotated(rotationY, 0, 1, 0);
+        gl.glTranslated(translateX, translateY, translateZ);
+        gl.glScalef(scale, scale, scale);
+        gl.glRotated(rotationX, 1, 0, 0);
+        gl.glRotated(rotationY, 0, 1, 0);
 
-            gl.glColor3f(1, 1, 1);
-            gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+        gl.glColor3f(1, 1, 1);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
-            Shape.rectangle(gl, width, height, depth, true);
+        Shape.rectangle(gl, width, height, depth, true);
 
         gl.glPopMatrix();
+    }
+
+    public void scale(float factor) {
+        this.scale *= factor;
+    }
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getDepth() {
+        return depth;
+    }
+
+    public double getTranslateX() {
+        return translateX;
+    }
+
+    public double getTranslateY() {
+        return translateY;
+    }
+
+    public double getTranslateZ() {
+        return translateZ;
+    }
+
+    public int getRotationX() {
+        return rotationX;
+    }
+
+    public int getRotationY() {
+        return rotationY;
+    }
+
+    public float getScale() {
+        return scale;
     }
 
 }

@@ -4,6 +4,7 @@ import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.zeljko.graphics.Blueprint;
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
 
@@ -24,6 +25,7 @@ public class Actuator implements GLEventListener {
     private final Light light;
     private GLCanvas canvas;
     private FPSAnimator animator;
+    private Blueprint currentBlueprint;
 
     public Actuator(JFrame frame) {
         GLProfile profile = GLProfile.getDefault();
@@ -45,7 +47,7 @@ public class Actuator implements GLEventListener {
 
             animator = new FPSAnimator(canvas, 60);
 
-            gui = new Gui(frame, inputListener);
+            gui = new Gui(frame, inputListener, this);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
             frame.add(gui.getPanel(), BorderLayout.SOUTH);
@@ -56,6 +58,7 @@ public class Actuator implements GLEventListener {
                     0, 1, 0);
 
             camera.setScale(15);
+            this.currentBlueprint = BlueprintFactory.createHouseBlueprint();
 
             frame.pack();
             frame.setVisible(true);
@@ -85,6 +88,9 @@ public class Actuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.setObserver();
 
+        // draw blueprint
+        currentBlueprint.drawBlueprint(gl);
+
         for (Model3D model3D : inputListener.getModels()) {
             model3D.draw(gl);
         }
@@ -102,4 +108,14 @@ public class Actuator implements GLEventListener {
     public void dispose(GLAutoDrawable glAutoDrawable) {
     }
 
+    public boolean checkAlignment() {
+        if (currentBlueprint == null || inputListener.getModels().isEmpty()) return false;
+
+        for (Model3D model : inputListener.getModels()) {
+            if (!currentBlueprint.isModelAligned(model)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
