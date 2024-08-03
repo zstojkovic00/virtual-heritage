@@ -11,6 +11,8 @@ import com.zeljko.graphics.Light;
 import com.zeljko.graphics.Model3D;
 import com.zeljko.ui.Gui;
 
+import java.util.List;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -111,11 +113,7 @@ public class Actuator implements GLEventListener {
     public boolean checkAlignment() {
         if (currentBlueprint == null || inputListener.getModels().isEmpty()) return false;
 
-        for (Model3D model : inputListener.getModels()) {
-            if (!currentBlueprint.isModelAligned(model)) {
-                return false;
-            }
-        }
-        return true;
+        List<Model3D> userModels = inputListener.getModels();
+        return currentBlueprint.areAllModelsAligned(userModels);
     }
 }

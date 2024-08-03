@@ -3,34 +3,85 @@ package com.zeljko.graphics;
 import com.jogamp.opengl.GL2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Blueprint {
     private List<Model3D> blueprintModels;
+    private List<Boolean> filledBlueprints;
+
+
     private int maxRectangles;
     private int maxCylinders;
 
     public Blueprint(int maxRectangles, int maxCylinders) {
         this.blueprintModels = new ArrayList<>();
+        this.filledBlueprints = new ArrayList<>(Collections.nCopies(maxRectangles + maxCylinders, false));
     }
 
-    public boolean isModelAligned(Model3D modelToCheck) {
-        for (Model3D blueprintModel : blueprintModels) {
-            if (isModelAlignedWithBlueprint(modelToCheck, blueprintModel)) {
-                return true;
+
+    public boolean areAllModelsAligned(List<Model3D> models) {
+        if (models.size() != blueprintModels.size()) return false;
+
+        resetFilledBlueprints();
+
+        for (Model3D model : models) {
+            boolean modelAligned = false;
+
+            for (int i = 0; i < blueprintModels.size(); i++) {
+                if (!filledBlueprints.get(i) && isModelAlignedWithBlueprint(model, blueprintModels.get(i))) {
+                    filledBlueprints.set(i, true);
+                    modelAligned = true;
+                    break;
+                }
+
+            }
+            if (!modelAligned) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
-
 
     private boolean isModelAlignedWithBlueprint(Model3D modelToCheck, Model3D blueprintModel) {
-        double tolerance = 0.1;
+        double tolerance = 0.05;
 
-        return Math.abs(modelToCheck.getTranslateX() - blueprintModel.getTranslateX()) <= (blueprintModel.getWidth() / 2 + tolerance) &&
-                Math.abs(modelToCheck.getTranslateY() - blueprintModel.getTranslateY()) <= (blueprintModel.getHeight() / 2 + tolerance) &&
-                Math.abs(modelToCheck.getTranslateZ() - blueprintModel.getTranslateZ()) <= (blueprintModel.getDepth() / 2 + tolerance);
+
+        System.out.println("Model to check:");
+        System.out.println("  Width: " + modelToCheck.getWidth());
+        System.out.println("  Height: " + modelToCheck.getHeight());
+        System.out.println("  Depth: " + modelToCheck.getDepth());
+        System.out.println("  TranslateX: " + modelToCheck.getTranslateX());
+        System.out.println("  TranslateY: " + modelToCheck.getTranslateY());
+        System.out.println("  TranslateZ: " + modelToCheck.getTranslateZ());
+
+        System.out.println("Blueprint model:");
+        System.out.println("  Width: " + blueprintModel.getWidth());
+        System.out.println("  Height: " + blueprintModel.getHeight());
+        System.out.println("  Depth: " + blueprintModel.getDepth());
+        System.out.println("  TranslateX: " + blueprintModel.getTranslateX());
+        System.out.println("  TranslateY: " + blueprintModel.getTranslateY());
+        System.out.println("  TranslateZ: " + blueprintModel.getTranslateZ());
+
+        boolean sameSize = Math.abs(modelToCheck.getWidth() - blueprintModel.getWidth()) <= tolerance &&
+                Math.abs(modelToCheck.getHeight() - blueprintModel.getHeight()) <= tolerance &&
+                Math.abs(modelToCheck.getDepth() - blueprintModel.getDepth()) <= tolerance;
+
+        boolean samePosition = Math.abs(modelToCheck.getTranslateX() - blueprintModel.getTranslateX()) <= tolerance &&
+                Math.abs(modelToCheck.getTranslateY() - blueprintModel.getTranslateY()) <= tolerance &&
+                Math.abs(modelToCheck.getTranslateZ() - blueprintModel.getTranslateZ()) <= tolerance;
+
+        return sameSize && samePosition;
     }
+
+    private boolean areAllBlueprintsFilled() {
+        return !filledBlueprints.contains(false);
+    }
+
+    private void resetFilledBlueprints() {
+        Collections.fill(filledBlueprints, false);
+    }
+
     public void drawBlueprint(GL2 gl) {
         if (blueprintModels.isEmpty()) return;
 
@@ -61,6 +112,7 @@ public class Blueprint {
 
     public void addModel(Model3D model) {
         blueprintModels.add(model);
+        filledBlueprints.add(false);
     }
 
     public List<Model3D> getBlueprintModels() {
