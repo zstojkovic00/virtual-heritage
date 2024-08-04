@@ -11,13 +11,15 @@ import java.util.List;
 import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 
 
-public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener {
+public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
     private List<Model3D> models = new ArrayList<>();
     private boolean shouldDraw = false;
     private int currentModelIndex = -1;
     private final Camera camera;
-    private boolean isRightMouseButtonPressed = false;
+    private boolean isLeftMouseButtonPressed = false;
+    private static final double ROTATION_SPEED = 0.1;
+    private static final double ZOOM_SPEED = 0.5;
     private int lastMouseX;
     private int lastMouseY;
 
@@ -98,19 +100,36 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            isRightMouseButtonPressed = true;
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            isLeftMouseButtonPressed = true;
             lastMouseX = e.getX();
             lastMouseY = e.getY();
         }
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            isRightMouseButtonPressed = false;
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            isLeftMouseButtonPressed = false;
         }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (isLeftMouseButtonPressed) {
+            int deltaX = e.getX() - lastMouseX;
+            int deltaY = e.getY() - lastMouseY;
+
+            camera.rotate(Math.toRadians(deltaX * ROTATION_SPEED), Math.toRadians(-deltaY * ROTATION_SPEED));
+
+            lastMouseX = e.getX();
+            lastMouseY = e.getY();
+        }
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        camera.zoom(e.getPreciseWheelRotation() * ZOOM_SPEED);
     }
 
     @Override
@@ -121,20 +140,6 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     @Override
     public void mouseExited(MouseEvent e) {
 
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if (isRightMouseButtonPressed) {
-            int deltaX = e.getX() - lastMouseX;
-            int deltaY = e.getY() - lastMouseY;
-
-            System.out.println("Mouse dragged: deltaX = " + deltaX + ", deltaY = " + deltaY);
-//            camera.rotate(-deltaY * 0.5f, -deltaX * 0.5f);
-
-            lastMouseX = e.getX();
-            lastMouseY = e.getY();
-        }
     }
 
     @Override

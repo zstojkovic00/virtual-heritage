@@ -2,20 +2,16 @@ package com.zeljko.core;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.zeljko.graphics.Blueprint;
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
-
 import com.zeljko.graphics.Model3D;
 import com.zeljko.ui.Gui;
 
-import java.util.List;
-
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.List;
 
 import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
 import static com.zeljko.utils.Constants.WINDOW_WIDTH;
@@ -43,25 +39,21 @@ public class Actuator implements GLEventListener {
 
         SwingUtilities.invokeLater(() -> {
             canvas = new GLCanvas(caps);
-            canvas.setPreferredSize(new Dimension(1000, 562));
+            canvas.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
             canvas.addGLEventListener(this);
             canvas.addKeyListener(inputListener);
             canvas.addMouseListener(inputListener);
             canvas.addMouseMotionListener(inputListener);
+            canvas.addMouseWheelListener(inputListener);
 
             animator = new FPSAnimator(canvas, 60);
-
             gui = new Gui(frame, inputListener, this);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
             frame.add(gui.getPanel(), BorderLayout.SOUTH);
 
-
-            camera.lookAt(-5, 0, 3,
-                    0, 0, 0,
-                    0, 1, 0);
-
-            camera.setScale(15);
+            camera.setCenter(0, 0, 0);
+            camera.zoom(-2);
             this.currentBlueprint = BlueprintFactory.createHouseBlueprint();
 
             frame.pack();
@@ -80,10 +72,7 @@ public class Actuator implements GLEventListener {
         gl.glClearColor(0, 0, 0, 0);
 
         light.setupLighting(gl);
-        GLU.createGLU(gl);
 
-        camera.setupViewport(gl);
-        camera.setupProjection(gl);
     }
 
     @Override
@@ -93,8 +82,7 @@ public class Actuator implements GLEventListener {
 
         camera.setupViewport(gl);
         camera.setupProjection(gl);
-        camera.setObserver();
-
+        camera.applyViewTransform(gl);
 
         // draw blueprint
         currentBlueprint.drawBlueprint(gl);
@@ -102,14 +90,11 @@ public class Actuator implements GLEventListener {
         for (Model3D model3D : inputListener.getModels()) {
             model3D.draw(gl);
         }
-        camera.apply(gl);
-
     }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL2 gl = drawable.getGL().getGL2();
-        gl.glViewport(0, 0, width, height);
     }
 
     @Override
