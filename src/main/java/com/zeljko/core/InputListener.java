@@ -1,5 +1,6 @@
 package com.zeljko.core;
 
+import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Model3D;
 import com.zeljko.utils.ShapeType;
 
@@ -10,11 +11,20 @@ import java.util.List;
 import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 
 
-public class InputListener implements KeyListener, ActionListener {
+public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener {
 
     private List<Model3D> models = new ArrayList<>();
     private boolean shouldDraw = false;
     private int currentModelIndex = -1;
+    private final Camera camera;
+    private boolean isRightMouseButtonPressed = false;
+    private int lastMouseX;
+    private int lastMouseY;
+
+    public InputListener(Camera camera) {
+        this.camera = camera;
+    }
+
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -79,6 +89,57 @@ public class InputListener implements KeyListener, ActionListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            isRightMouseButtonPressed = true;
+            lastMouseX = e.getX();
+            lastMouseY = e.getY();
+        }
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            isRightMouseButtonPressed = false;
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (isRightMouseButtonPressed) {
+            int deltaX = e.getX() - lastMouseX;
+            int deltaY = e.getY() - lastMouseY;
+
+            System.out.println("Mouse dragged: deltaX = " + deltaX + ", deltaY = " + deltaY);
+//            camera.rotate(-deltaY * 0.5f, -deltaX * 0.5f);
+
+            lastMouseX = e.getX();
+            lastMouseY = e.getY();
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 
     @Override

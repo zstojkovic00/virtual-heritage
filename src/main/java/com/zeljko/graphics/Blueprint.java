@@ -9,8 +9,6 @@ import java.util.List;
 public class Blueprint {
     private List<Model3D> blueprintModels;
     private List<Boolean> filledBlueprints;
-
-
     private int maxRectangles;
     private int maxCylinders;
 
@@ -43,35 +41,51 @@ public class Blueprint {
         return true;
     }
 
-    private boolean isModelAlignedWithBlueprint(Model3D modelToCheck, Model3D blueprintModel) {
+    private boolean isModelAlignedWithBlueprint(Model3D model, Model3D blueprint) {
         double tolerance = 0.05;
 
+        double widthDiff = model.getWidth() - blueprint.getWidth();
+        double heightDiff = model.getHeight() - blueprint.getHeight();
+        double depthDiff = model.getDepth() - blueprint.getDepth();
 
-        System.out.println("Model to check:");
-        System.out.println("  Width: " + modelToCheck.getWidth());
-        System.out.println("  Height: " + modelToCheck.getHeight());
-        System.out.println("  Depth: " + modelToCheck.getDepth());
-        System.out.println("  TranslateX: " + modelToCheck.getTranslateX());
-        System.out.println("  TranslateY: " + modelToCheck.getTranslateY());
-        System.out.println("  TranslateZ: " + modelToCheck.getTranslateZ());
+        double xDiff = model.getTranslateX() - blueprint.getTranslateX();
+        double yDiff = model.getTranslateY() - blueprint.getTranslateY();
+        double zDiff = model.getTranslateZ() - blueprint.getTranslateZ();
 
-        System.out.println("Blueprint model:");
-        System.out.println("  Width: " + blueprintModel.getWidth());
-        System.out.println("  Height: " + blueprintModel.getHeight());
-        System.out.println("  Depth: " + blueprintModel.getDepth());
-        System.out.println("  TranslateX: " + blueprintModel.getTranslateX());
-        System.out.println("  TranslateY: " + blueprintModel.getTranslateY());
-        System.out.println("  TranslateZ: " + blueprintModel.getTranslateZ());
+        System.out.println("Differences (Model - Blueprint):");
+        System.out.printf("  Width: %.6f (Tolerance: %.6f)%n", widthDiff, tolerance);
+        System.out.printf("  Height: %.6f (Tolerance: %.6f)%n", heightDiff, tolerance);
+        System.out.printf("  Depth: %.6f (Tolerance: %.6f)%n", depthDiff, tolerance);
+        System.out.printf("  X position: %.6f (Tolerance: %.6f)%n", xDiff, tolerance);
+        System.out.printf("  Y position: %.6f (Tolerance: %.6f)%n", yDiff, tolerance);
+        System.out.printf("  Z position: %.6f (Tolerance: %.6f)%n", zDiff, tolerance);
 
-        boolean sameSize = Math.abs(modelToCheck.getWidth() - blueprintModel.getWidth()) <= tolerance &&
-                Math.abs(modelToCheck.getHeight() - blueprintModel.getHeight()) <= tolerance &&
-                Math.abs(modelToCheck.getDepth() - blueprintModel.getDepth()) <= tolerance;
+        // Check dimensions
+        boolean size = Math.abs(widthDiff) <= tolerance &&
+                Math.abs(heightDiff) <= tolerance &&
+                Math.abs(depthDiff) <= tolerance;
 
-        boolean samePosition = Math.abs(modelToCheck.getTranslateX() - blueprintModel.getTranslateX()) <= tolerance &&
-                Math.abs(modelToCheck.getTranslateY() - blueprintModel.getTranslateY()) <= tolerance &&
-                Math.abs(modelToCheck.getTranslateZ() - blueprintModel.getTranslateZ()) <= tolerance;
+        // Check position
+        boolean position = Math.abs(xDiff) <= tolerance &&
+                Math.abs(yDiff) <= tolerance &&
+                Math.abs(zDiff) <= tolerance;
 
-        return sameSize && samePosition;
+
+        if (!size) {
+            System.out.println("Size issues:");
+            if (Math.abs(widthDiff) > tolerance) System.out.printf("  Width off by: %.6f%n", widthDiff);
+            if (Math.abs(heightDiff) > tolerance) System.out.printf("  Height off by: %.6f%n", heightDiff);
+            if (Math.abs(depthDiff) > tolerance) System.out.printf("  Depth off by: %.6f%n", depthDiff);
+        }
+
+        if (!position) {
+            System.out.println("Position issues:");
+            if (Math.abs(xDiff) > tolerance) System.out.printf("  X coordinate off by: %.6f%n", xDiff);
+            if (Math.abs(yDiff) > tolerance) System.out.printf("  Y coordinate off by: %.6f%n", yDiff);
+            if (Math.abs(zDiff) > tolerance) System.out.printf("  Z coordinate off by: %.6f%n", zDiff);
+        }
+
+        return size && position;
     }
 
     private boolean areAllBlueprintsFilled() {

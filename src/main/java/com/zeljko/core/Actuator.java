@@ -39,13 +39,15 @@ public class Actuator implements GLEventListener {
 
         this.light = new Light();
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
-        inputListener = new InputListener();
+        inputListener = new InputListener(camera);
 
         SwingUtilities.invokeLater(() -> {
             canvas = new GLCanvas(caps);
             canvas.setPreferredSize(new Dimension(1000, 562));
             canvas.addGLEventListener(this);
             canvas.addKeyListener(inputListener);
+            canvas.addMouseListener(inputListener);
+            canvas.addMouseMotionListener(inputListener);
 
             animator = new FPSAnimator(canvas, 60);
 
@@ -79,6 +81,9 @@ public class Actuator implements GLEventListener {
 
         light.setupLighting(gl);
         GLU.createGLU(gl);
+
+        camera.setupViewport(gl);
+        camera.setupProjection(gl);
     }
 
     @Override
@@ -90,14 +95,15 @@ public class Actuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.setObserver();
 
+
         // draw blueprint
         currentBlueprint.drawBlueprint(gl);
 
         for (Model3D model3D : inputListener.getModels()) {
             model3D.draw(gl);
         }
-
         camera.apply(gl);
+
     }
 
     @Override

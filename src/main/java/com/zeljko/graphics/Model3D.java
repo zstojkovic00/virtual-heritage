@@ -3,24 +3,11 @@ package com.zeljko.graphics;
 import com.jogamp.opengl.GL2;
 
 public class Model3D {
-    private double width;
-    private double height;
-    private double depth;
-    private double translateX;
-    private double translateY;
-    private double translateZ;
-    private int rotationX;
-    private int rotationY;
+    private double width, height, depth;
+    private double translateX, translateY, translateZ;
+    private int rotationX, rotationY;
     private float scale;
     private boolean isSelected;
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
 
     public Model3D(double width, double height, double depth) {
         this.width = width;
@@ -60,6 +47,14 @@ public class Model3D {
         Shape.rectangle(gl, width, height, depth, true);
 
         gl.glPopMatrix();
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public void scale(float factor) {
