@@ -18,6 +18,7 @@ public class Blueprint {
     }
 
 
+    // separate class? rotation check?
     public boolean areAllModelsAligned(List<Model3D> models) {
         if (models.size() != blueprintModels.size()) return false;
 
@@ -42,7 +43,7 @@ public class Blueprint {
     }
 
     private boolean isModelAlignedWithBlueprint(Model3D model, Model3D blueprint) {
-        double tolerance = 0.05;
+        double tolerance = 0.1;
 
         double widthDiff = model.getWidth() - blueprint.getWidth();
         double heightDiff = model.getHeight() - blueprint.getHeight();
@@ -72,14 +73,14 @@ public class Blueprint {
 
 
         if (!size) {
-            System.out.println("Size issues:");
+            System.out.println("Size: ");
             if (Math.abs(widthDiff) > tolerance) System.out.printf("  Width off by: %.6f%n", widthDiff);
             if (Math.abs(heightDiff) > tolerance) System.out.printf("  Height off by: %.6f%n", heightDiff);
             if (Math.abs(depthDiff) > tolerance) System.out.printf("  Depth off by: %.6f%n", depthDiff);
         }
 
         if (!position) {
-            System.out.println("Position issues:");
+            System.out.println("Position: ");
             if (Math.abs(xDiff) > tolerance) System.out.printf("  X coordinate off by: %.6f%n", xDiff);
             if (Math.abs(yDiff) > tolerance) System.out.printf("  Y coordinate off by: %.6f%n", yDiff);
             if (Math.abs(zDiff) > tolerance) System.out.printf("  Z coordinate off by: %.6f%n", zDiff);

@@ -14,8 +14,13 @@ public class BlueprintFactory {
         Model3D rectangle2 = new Model3D(5.0, 1.5, 2.0);
         rectangle2.translate(0, 2, 0);
 
+        Model3D rectangle3 = new Model3D(5.0, 1.5, 2.0);
+        rectangle3.translate(2, 4, 5);
+
+
         blueprint.addModel(rectangle);
         blueprint.addModel(rectangle2);
+        blueprint.addModel(rectangle3);
         return blueprint;
     }
 }

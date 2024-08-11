@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 
-
+// separate class for Mouse and Key Listener?
 public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
     private List<Model3D> models = new ArrayList<>();
