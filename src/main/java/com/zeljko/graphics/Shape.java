@@ -86,8 +86,8 @@ public class Shape {
     }
 
 
-    private static void cylinder(GL2 gl, double radius, double height, int slices, int stacks, int rings,
-                                 boolean makeTextureCoordinates) {
+    public static void cylinder(GL2 gl, double radius, double height, int slices, int stacks, int rings,
+                                boolean makeTextureCoordinates) {
         if (radius <= 0) throw new IllegalArgumentException("Radius must be positive");
         if (height <= 0) throw new IllegalArgumentException("Height must be positive");
         if (slices < 3) throw new IllegalArgumentException("Number of slices must be at least 3.");

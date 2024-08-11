@@ -154,7 +154,9 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
         System.out.println(type);
 
         if (ShapeType.RECTANGLE.name().equalsIgnoreCase(type)) {
-            newModel = new Model3D(5.0, 1.5, 2.0);
+            newModel = new Model3D(5.0, 1.5, 2.0, ShapeType.RECTANGLE);
+        } else if (ShapeType.CYLINDER.name().equalsIgnoreCase(type)) {
+            newModel = new Model3D(1.0, 2.0, 1.0, ShapeType.CYLINDER);
         } else {
             System.out.println("Not implemented yet");
             return;

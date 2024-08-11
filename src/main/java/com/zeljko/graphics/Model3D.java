@@ -1,6 +1,7 @@
 package com.zeljko.graphics;
 
 import com.jogamp.opengl.GL2;
+import com.zeljko.utils.ShapeType;
 
 public class Model3D {
     private double width, height, depth;
@@ -8,8 +9,9 @@ public class Model3D {
     private int rotationX, rotationY;
     private float scale;
     private boolean isSelected;
+    private ShapeType shapeType;
 
-    public Model3D(double width, double height, double depth) {
+    public Model3D(double width, double height, double depth, ShapeType shapeType) {
         this.width = width;
         this.height = height;
         this.depth = depth;
@@ -19,6 +21,7 @@ public class Model3D {
         this.rotationX = 0;
         this.rotationY = 0;
         this.scale = 1.0f;
+        this.shapeType = shapeType;
     }
 
     public void translate(double x, double y, double z) {
@@ -33,7 +36,6 @@ public class Model3D {
     }
 
     public void draw(GL2 gl) {
-
         gl.glPushMatrix();
 
         gl.glTranslated(translateX, translateY, translateZ);
@@ -44,7 +46,11 @@ public class Model3D {
         gl.glColor3f(1, 1, 1);
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
-        Shape.rectangle(gl, width, height, depth, true);
+        if (shapeType == ShapeType.RECTANGLE) {
+            Shape.rectangle(gl, width, height, depth, true);
+        } else if (shapeType == ShapeType.CYLINDER) {
+            Shape.cylinder(gl, width/2, height, 32, 32, 1, true);
+        }
 
         gl.glPopMatrix();
     }
@@ -95,5 +101,7 @@ public class Model3D {
     public float getScale() {
         return scale;
     }
-
+    public ShapeType getShapeType() {
+        return shapeType;
+    }
 }
