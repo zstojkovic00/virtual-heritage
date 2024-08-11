@@ -4,7 +4,7 @@ import com.jogamp.opengl.GL2;
 
 public class Shape {
 
-    public static void rectangle(GL2 gl, double width, double height, double depth, boolean makeTextureCoordinate) {
+    public static void cuboid(GL2 gl, double width, double height, double depth, boolean makeTextureCoordinate) {
         double halfWidth = width / 2;
         double halfHeight = height / 2;
         double halfDepth = depth / 2;
@@ -124,7 +124,7 @@ public class Shape {
                 double d1 = (1.0 / rings) * j;
                 double d2 = (1.0 / rings) * (j + 1);
                 gl.glBegin(GL2.GL_QUAD_STRIP);
-                for (int i = 0; i <= slices; i++) {  // TODO: ADD  "i<= slices"
+                for (int i = 0; i <= slices; i++) {
                     double angle = (2 * Math.PI / slices) * i;
                     double sin = Math.sin(angle);
                     double cosine = Math.cos(angle);
@@ -146,7 +146,7 @@ public class Shape {
                 double d1 = (1.0 / rings) * j;
                 double d2 = (1.0 / rings) * (j + 1);
                 gl.glBegin(GL2.GL_QUAD_STRIP);
-                for (int i = 0; i <= slices; i++) {  // TODO: ADD  "i<= slices"
+                for (int i = 0; i <= slices; i++) {
                     double angle = (2 * Math.PI / slices) * i;
                     double sin = Math.sin(angle);
                     double cosine = Math.cos(angle);

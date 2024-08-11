@@ -11,6 +11,26 @@ public class Model3D {
     private boolean isSelected;
     private ShapeType shapeType;
 
+    public void draw(GL2 gl) {
+        gl.glPushMatrix();
+
+        gl.glTranslated(translateX, translateY, translateZ);
+        gl.glScalef(scale, scale, scale);
+        gl.glRotated(rotationX, 1, 0, 0);
+        gl.glRotated(rotationY, 0, 1, 0);
+
+        gl.glColor3f(1, 1, 1);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+
+        if (shapeType == ShapeType.RECTANGLE) {
+            Shape.cuboid(gl, width, height, depth, true);
+        } else if (shapeType == ShapeType.CYLINDER) {
+            Shape.cylinder(gl, width/2, height, 32, 32, 1, true);
+        }
+
+        gl.glPopMatrix();
+    }
+
     public Model3D(double width, double height, double depth, ShapeType shapeType) {
         this.width = width;
         this.height = height;
@@ -33,26 +53,6 @@ public class Model3D {
     public void rotate(int x, int y) {
         this.rotationX += x;
         this.rotationY += y;
-    }
-
-    public void draw(GL2 gl) {
-        gl.glPushMatrix();
-
-        gl.glTranslated(translateX, translateY, translateZ);
-        gl.glScalef(scale, scale, scale);
-        gl.glRotated(rotationX, 1, 0, 0);
-        gl.glRotated(rotationY, 0, 1, 0);
-
-        gl.glColor3f(1, 1, 1);
-        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
-
-        if (shapeType == ShapeType.RECTANGLE) {
-            Shape.rectangle(gl, width, height, depth, true);
-        } else if (shapeType == ShapeType.CYLINDER) {
-            Shape.cylinder(gl, width/2, height, 32, 32, 1, true);
-        }
-
-        gl.glPopMatrix();
     }
 
     public boolean isSelected() {

@@ -1,14 +1,15 @@
 package com.zeljko.graphics;
 
 import com.jogamp.opengl.GL2;
+import com.zeljko.utils.ShapeType;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Blueprint {
-    private List<Model3D> blueprintModels;
-    private List<Boolean> filledBlueprints;
+    private final List<Model3D> blueprintModels;
+    private final List<Boolean> filledBlueprints;
     private int maxRectangles;
     private int maxCylinders;
 
@@ -17,6 +18,38 @@ public class Blueprint {
         this.filledBlueprints = new ArrayList<>(Collections.nCopies(maxRectangles + maxCylinders, false));
     }
 
+    private void drawModelOutline(GL2 gl, Model3D model) {
+        if (model.getWidth() <= 0 || model.getHeight() <= 0 || model.getDepth() <= 0) return;
+
+        if (model.getShapeType() == ShapeType.RECTANGLE) {
+            Shape.cuboid(gl, model.getWidth(), model.getHeight(), model.getDepth(), false);
+        } else if (model.getShapeType() == ShapeType.CYLINDER) {
+            Shape.cylinder(gl, model.getWidth() / 2, model.getHeight(), 32, 32, 1, false);
+        }
+    }
+
+    public void drawBlueprint(GL2 gl) {
+        if (blueprintModels.isEmpty()) return;
+
+        gl.glPushMatrix();
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glLineWidth(2);
+
+        for (Model3D model : blueprintModels) {
+            gl.glPushMatrix();
+            gl.glTranslated(model.getTranslateX(), model.getTranslateY(), model.getTranslateZ());
+            gl.glRotated(model.getRotationX(), 1, 0, 0);
+            gl.glRotated(model.getRotationY(), 0, 1, 0);
+            gl.glScalef(model.getScale(), model.getScale(), model.getScale());
+
+            drawModelOutline(gl, model);
+
+            gl.glPopMatrix();
+        }
+
+        gl.glPopMatrix();
+    }
 
     // separate class? rotation check?
     public boolean areAllModelsAligned(List<Model3D> models) {
@@ -43,6 +76,8 @@ public class Blueprint {
     }
 
     private boolean isModelAlignedWithBlueprint(Model3D model, Model3D blueprint) {
+        if (model.getShapeType() != blueprint.getShapeType()) return false;
+
         double tolerance = 0.1;
 
         double widthDiff = model.getWidth() - blueprint.getWidth();
@@ -60,6 +95,11 @@ public class Blueprint {
         System.out.printf("  X position: %.6f (Tolerance: %.6f)%n", xDiff, tolerance);
         System.out.printf("  Y position: %.6f (Tolerance: %.6f)%n", yDiff, tolerance);
         System.out.printf("  Z position: %.6f (Tolerance: %.6f)%n", zDiff, tolerance);
+
+
+        if (model.getShapeType() == ShapeType.CYLINDER) {
+            widthDiff = (model.getWidth() / 2) - (blueprint.getWidth() / 2);
+        }
 
         // Check dimensions
         boolean size = Math.abs(widthDiff) <= tolerance &&
@@ -95,34 +135,6 @@ public class Blueprint {
 
     private void resetFilledBlueprints() {
         Collections.fill(filledBlueprints, false);
-    }
-
-    public void drawBlueprint(GL2 gl) {
-        if (blueprintModels.isEmpty()) return;
-
-        gl.glPushMatrix();
-        gl.glColor3f(1.0f, 1.0f, 1.0f);
-        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
-        gl.glLineWidth(2);
-
-        for (Model3D model : blueprintModels) {
-            gl.glPushMatrix();
-            gl.glTranslated(model.getTranslateX(), model.getTranslateY(), model.getTranslateZ());
-            gl.glRotated(model.getRotationX(), 1, 0, 0);
-            gl.glRotated(model.getRotationY(), 0, 1, 0);
-            gl.glScalef(model.getScale(), model.getScale(), model.getScale());
-
-            drawModelOutline(gl, model);
-
-            gl.glPopMatrix();
-        }
-
-        gl.glPopMatrix();
-    }
-
-    private void drawModelOutline(GL2 gl, Model3D model) {
-        if (model.getWidth() <= 0 || model.getHeight() <= 0 || model.getDepth() <= 0) return;
-        Shape.rectangle(gl, model.getWidth(), model.getHeight(), model.getDepth(), false);
     }
 
     public void addModel(Model3D model) {
