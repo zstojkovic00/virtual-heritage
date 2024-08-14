@@ -22,7 +22,7 @@ public class Model3D {
         gl.glColor3f(1, 1, 1);
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
-        if (shapeType == ShapeType.RECTANGLE) {
+        if (shapeType == ShapeType.CUBOID) {
             Shape.cuboid(gl, width, height, depth, true);
         } else if (shapeType == ShapeType.CYLINDER) {
             Shape.cylinder(gl, width/2, height, 32, 32, 1, true);
@@ -104,4 +104,17 @@ public class Model3D {
     public ShapeType getShapeType() {
         return shapeType;
     }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setDepth(double depth) {
+        this.depth = depth;
+    }
+
 }

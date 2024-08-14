@@ -34,44 +34,73 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
         Model3D currentModel = models.get(currentModelIndex);
         int key = e.getKeyCode();
 
+
         switch (key) {
+
+            // Dimensions
+            case KeyEvent.VK_1:
+                currentModel.setWidth(currentModel.getWidth() - UNIT_MOVEMENT);
+                break;
+            case KeyEvent.VK_2:
+                currentModel.setWidth(currentModel.getWidth() + UNIT_MOVEMENT);
+                break;
+            case KeyEvent.VK_3:
+                currentModel.setHeight(currentModel.getHeight() - UNIT_MOVEMENT);
+                break;
+            case KeyEvent.VK_4:
+                currentModel.setHeight(currentModel.getHeight() + UNIT_MOVEMENT);
+                break;
+//            case KeyEvent.VK_5:
+//                currentModel.setDepth(currentModel.getDepth() - UNIT_MOVEMENT);
+//                break;
+//            case KeyEvent.VK_6:
+//                currentModel.setDepth(currentModel.getDepth() + UNIT_MOVEMENT);
+//                break;
+
+            // Translation
+            case KeyEvent.VK_A:
+                currentModel.translate(-UNIT_MOVEMENT, 0, 0);
+                break;
+            case KeyEvent.VK_D:
+                currentModel.translate(UNIT_MOVEMENT, 0, 0);
+                break;
+            case KeyEvent.VK_W:
+                currentModel.translate(0, UNIT_MOVEMENT, 0);
+                break;
+            case KeyEvent.VK_S:
+                currentModel.translate(0, -UNIT_MOVEMENT, 0);
+                break;
+            case KeyEvent.VK_Q:
+                currentModel.translate(0, 0, UNIT_MOVEMENT);
+                break;
+            case KeyEvent.VK_E:
+                currentModel.translate(0, 0, -UNIT_MOVEMENT);
+                break;
+
+            // Rotation
+            case KeyEvent.VK_LEFT:
+                currentModel.rotate(0, -1);
+                break;
+            case KeyEvent.VK_RIGHT:
+                currentModel.rotate(0, 1);
+                break;
+            case KeyEvent.VK_UP:
+                currentModel.rotate(-1, 0);
+                break;
+            case KeyEvent.VK_DOWN:
+                currentModel.rotate(1, 0);
+                break;
+
+            // Scale
             case KeyEvent.VK_Z:
                 currentModel.scale(1.1f);
                 break;
             case KeyEvent.VK_X:
                 currentModel.scale(0.9f);
                 break;
-            case KeyEvent.VK_I:
-                currentModel.translate(0, 0, UNIT_MOVEMENT);
-                break;
-            case KeyEvent.VK_O:
-                currentModel.translate(0, 0, -UNIT_MOVEMENT);
-                break;
-            case KeyEvent.VK_J:
-                currentModel.translate(UNIT_MOVEMENT, 0, 0);
-                break;
-            case KeyEvent.VK_K:
-                currentModel.translate(-UNIT_MOVEMENT, 0, 0);
-                break;
-            case KeyEvent.VK_N:
-                currentModel.translate(0, UNIT_MOVEMENT, 0);
-                break;
-            case KeyEvent.VK_M:
-                currentModel.translate(0, -UNIT_MOVEMENT, 0);
-                break;
-            case KeyEvent.VK_LEFT:
-                currentModel.rotate(1, 0);
-                break;
-            case KeyEvent.VK_RIGHT:
-                currentModel.rotate(-1, 0);
-                break;
-            case KeyEvent.VK_UP:
-                currentModel.rotate(0, -1);
-                break;
-            case KeyEvent.VK_DOWN:
-                currentModel.rotate(0, 1);
-                break;
-            case KeyEvent.VK_Q:
+
+            // Select model
+            case KeyEvent.VK_TAB:
                 if (!models.isEmpty()) {
                     models.get(currentModelIndex).setSelected(false);
                     currentModelIndex = (currentModelIndex + 1) % models.size();
@@ -79,6 +108,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
                     System.out.println("Selected model " + currentModelIndex);
                 }
                 break;
+
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
         }
@@ -153,8 +183,8 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
         String type = e.getActionCommand();
         System.out.println(type);
 
-        if (ShapeType.RECTANGLE.name().equalsIgnoreCase(type)) {
-            newModel = new Model3D(5.0, 1.5, 2.0, ShapeType.RECTANGLE);
+        if (ShapeType.CUBOID.name().equalsIgnoreCase(type)) {
+            newModel = new Model3D(5.0, 1.5, 2.0, ShapeType.CUBOID);
         } else if (ShapeType.CYLINDER.name().equalsIgnoreCase(type)) {
             newModel = new Model3D(1.0, 2.0, 1.0, ShapeType.CYLINDER);
         } else {

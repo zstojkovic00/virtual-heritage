@@ -54,7 +54,7 @@ public class Actuator implements GLEventListener {
 
             camera.setCenter(0, 0, 0);
             camera.zoom(-2);
-            this.currentBlueprint = BlueprintFactory.createHouseBlueprint();
+            this.currentBlueprint = BlueprintFactory.createTreeBlueprint();
 
             frame.pack();
             frame.setVisible(true);

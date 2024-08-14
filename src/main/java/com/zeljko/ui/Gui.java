@@ -48,13 +48,13 @@ public class Gui {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 
-        JPanel rectangle = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.RECTANGLE),
-                150, 150), actionListener, ShapeType.RECTANGLE.name());
+        JPanel cuboid = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CUBOID),
+                150, 150), actionListener, ShapeType.CUBOID.name());
 
         JPanel cylinder = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CYLINDER),
                 225, 135), actionListener, ShapeType.CYLINDER.name());
 
-        panel.add(rectangle);
+        panel.add(cuboid);
         panel.add(cylinder);
         panel.add(checkAlignmentButton);
     }

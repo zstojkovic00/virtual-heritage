@@ -10,18 +10,18 @@ import java.util.List;
 public class Blueprint {
     private final List<Model3D> blueprintModels;
     private final List<Boolean> filledBlueprints;
-    private int maxRectangles;
+    private int maxCuboids;
     private int maxCylinders;
 
-    public Blueprint(int maxRectangles, int maxCylinders) {
+    public Blueprint(int maxCuboids, int maxCylinders) {
         this.blueprintModels = new ArrayList<>();
-        this.filledBlueprints = new ArrayList<>(Collections.nCopies(maxRectangles + maxCylinders, false));
+        this.filledBlueprints = new ArrayList<>(Collections.nCopies(maxCuboids + maxCylinders, false));
     }
 
     private void drawModelOutline(GL2 gl, Model3D model) {
         if (model.getWidth() <= 0 || model.getHeight() <= 0 || model.getDepth() <= 0) return;
 
-        if (model.getShapeType() == ShapeType.RECTANGLE) {
+        if (model.getShapeType() == ShapeType.CUBOID) {
             Shape.cuboid(gl, model.getWidth(), model.getHeight(), model.getDepth(), false);
         } else if (model.getShapeType() == ShapeType.CYLINDER) {
             Shape.cylinder(gl, model.getWidth() / 2, model.getHeight(), 32, 32, 1, false);
