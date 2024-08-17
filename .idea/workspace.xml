@@ -5,15 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/AlignmentChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ModelFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/BlueprintFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Model3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Blueprint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ShapeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/images/rectangle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/images/cuboid.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/BlueprintTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/BlueprintTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -368,5 +374,12 @@
     <MESSAGE value="add docker for gui app" />
     <MESSAGE value="script for starting docker" />
     <option name="LAST_COMMIT_MESSAGE" value="script for starting docker" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.zeljko.graphics.Blueprint" memberName="maxCylinders" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

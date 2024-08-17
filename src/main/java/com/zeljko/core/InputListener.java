@@ -1,7 +1,7 @@
 package com.zeljko.core;
 
 import com.zeljko.graphics.Camera;
-import com.zeljko.graphics.Model3D;
+import com.zeljko.graphics.model.Model3D;
 import com.zeljko.utils.ShapeType;
 
 import java.awt.event.*;
@@ -13,26 +13,23 @@ import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 // separate class for Mouse and Key Listener?
 public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
-    private List<Model3D> models = new ArrayList<>();
-    private boolean shouldDraw = false;
-    private int currentModelIndex = -1;
+    private final ApplicationState applicationState;
     private final Camera camera;
     private boolean isLeftMouseButtonPressed = false;
-    private static final double ROTATION_SPEED = 0.1;
-    private static final double ZOOM_SPEED = 0.5;
     private int lastMouseX;
     private int lastMouseY;
 
-    public InputListener(Camera camera) {
+    public InputListener(ApplicationState applicationState, Camera camera) {
+        this.applicationState = applicationState;
         this.camera = camera;
     }
 
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (currentModelIndex == -1 || models.isEmpty()) return;
-        Model3D currentModel = models.get(currentModelIndex);
         int key = e.getKeyCode();
+        Model3D currentModel = applicationState.getCurrentModel();
+        if (currentModel == null) return;
 
 
         switch (key) {
@@ -101,17 +98,19 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
 
             // Select model
             case KeyEvent.VK_TAB:
-                if (!models.isEmpty()) {
-                    models.get(currentModelIndex).setSelected(false);
-                    currentModelIndex = (currentModelIndex + 1) % models.size();
-                    models.get(currentModelIndex).setSelected(true);
-                    System.out.println("Selected model " + currentModelIndex);
-                }
+                applicationState.selectNextModel();
                 break;
 
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String type = e.getActionCommand();
+        ShapeType shapeType = ShapeType.valueOf(type);
+        applicationState.addModel(shapeType);
     }
 
 
@@ -150,7 +149,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
             int deltaX = e.getX() - lastMouseX;
             int deltaY = e.getY() - lastMouseY;
 
-            camera.rotate(Math.toRadians(deltaX * ROTATION_SPEED), Math.toRadians(-deltaY * ROTATION_SPEED));
+            camera.rotateByMouse(deltaX, deltaY);
 
             lastMouseX = e.getX();
             lastMouseY = e.getY();
@@ -159,7 +158,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        camera.zoom(e.getPreciseWheelRotation() * ZOOM_SPEED);
+        camera.zoomByWheel(e.getPreciseWheelRotation());
     }
 
     @Override
@@ -175,67 +174,6 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     @Override
     public void mouseMoved(MouseEvent e) {
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        Model3D newModel;
-        String type = e.getActionCommand();
-        System.out.println(type);
-
-        if (ShapeType.CUBOID.name().equalsIgnoreCase(type)) {
-            newModel = new Model3D(5.0, 1.5, 2.0, ShapeType.CUBOID);
-        } else if (ShapeType.CYLINDER.name().equalsIgnoreCase(type)) {
-            newModel = new Model3D(1.0, 2.0, 1.0, ShapeType.CYLINDER);
-        } else {
-            System.out.println("Not implemented yet");
-            return;
-        }
-        newModel.translate(Math.random() * 10 - 5,
-                Math.random() * 10 - 5,
-                Math.random() * 10 - 5);
-
-        models.add(newModel);
-        if (currentModelIndex == -1) {
-            currentModelIndex = 0;
-            newModel.setSelected(true);
-        } else {
-            models.get(currentModelIndex).setSelected(false);
-            currentModelIndex = models.size() - 1;
-            newModel.setSelected(true);
-        }
-        setShouldDraw(true);
-    }
-
-    public List<Model3D> getModels() {
-        return models;
-    }
-
-    public Model3D getCurrentModel() {
-        if (currentModelIndex >= 0 && currentModelIndex < models.size()) {
-            return models.get(currentModelIndex);
-        }
-        return null;
-    }
-
-    public void setModels(List<Model3D> models) {
-        this.models = models;
-    }
-
-    public boolean isShouldDraw() {
-        return shouldDraw;
-    }
-
-    public void setShouldDraw(boolean shouldDraw) {
-        this.shouldDraw = shouldDraw;
-    }
-
-    public int getCurrentModelIndex() {
-        return currentModelIndex;
-    }
-
-    public void setCurrentModelIndex(int currentModelIndex) {
-        this.currentModelIndex = currentModelIndex;
     }
 
 }

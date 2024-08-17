@@ -1,8 +1,8 @@
 //package test;
 //
-//import com.zeljko.core.BlueprintFactory;
-//import com.zeljko.graphics.Blueprint;
-//import com.zeljko.graphics.Model3D;
+//import com.zeljko.utils.BlueprintFactory;
+//import com.zeljko.graphics.model.Blueprint;
+//import com.zeljko.graphics.model.Model3D;
 //import com.zeljko.utils.ShapeType;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;

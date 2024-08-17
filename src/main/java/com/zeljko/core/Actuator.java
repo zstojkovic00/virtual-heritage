@@ -3,27 +3,30 @@ package com.zeljko.core;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.zeljko.graphics.Blueprint;
+
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
-import com.zeljko.graphics.Model3D;
 import com.zeljko.ui.Gui;
+import com.zeljko.utils.AlignmentChecker;
+import com.zeljko.utils.BlueprintFactory;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
+
 
 import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
 import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 
 public class Actuator implements GLEventListener {
     private Gui gui;
+    private final ApplicationState applicationState;
+    private final Renderer renderer;
     private final Camera camera;
     private final InputListener inputListener;
     private final Light light;
     private GLCanvas canvas;
     private FPSAnimator animator;
-    private Blueprint currentBlueprint;
 
     public Actuator(JFrame frame) {
         GLProfile profile = GLProfile.getDefault();
@@ -33,9 +36,12 @@ public class Actuator implements GLEventListener {
         caps.setDoubleBuffered(true);
         caps.setStencilBits(8);
 
-        this.light = new Light();
+        this.applicationState = new ApplicationState();
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
-        inputListener = new InputListener(camera);
+        this.inputListener = new InputListener(applicationState, camera);
+        this.light = new Light();
+        this.renderer = new Renderer();
+
 
         SwingUtilities.invokeLater(() -> {
             canvas = new GLCanvas(caps);
@@ -54,7 +60,6 @@ public class Actuator implements GLEventListener {
 
             camera.setCenter(0, 0, 0);
             camera.zoom(-2);
-            this.currentBlueprint = BlueprintFactory.createTreeBlueprint();
 
             frame.pack();
             frame.setVisible(true);
@@ -71,6 +76,8 @@ public class Actuator implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
         gl.glClearColor(0, 0, 0, 0);
 
+        applicationState.setCurrentBlueprint(BlueprintFactory.createTreeBlueprint());
+
         light.setupLighting(gl);
 
     }
@@ -84,13 +91,17 @@ public class Actuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.applyViewTransform(gl);
 
-        // draw blueprint
-        currentBlueprint.drawBlueprint(gl);
 
-        for (Model3D model3D : inputListener.getModels()) {
-            model3D.draw(gl);
+        if (applicationState.getCurrentBlueprint() != null) {
+            renderer.renderScene(gl, applicationState.getCurrentBlueprint(), applicationState.getUserModels());
         }
+
     }
+
+    public boolean checkAlignment() {
+        return AlignmentChecker.areAllModelsAligned(applicationState.getCurrentBlueprint(), applicationState.getUserModels());
+    }
+
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -101,10 +112,4 @@ public class Actuator implements GLEventListener {
     public void dispose(GLAutoDrawable glAutoDrawable) {
     }
 
-    public boolean checkAlignment() {
-        if (currentBlueprint == null || inputListener.getModels().isEmpty()) return false;
-
-        List<Model3D> userModels = inputListener.getModels();
-        return currentBlueprint.areAllModelsAligned(userModels);
-    }
 }

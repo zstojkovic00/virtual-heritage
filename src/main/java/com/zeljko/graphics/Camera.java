@@ -3,13 +3,14 @@ package com.zeljko.graphics;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
 
+import static com.zeljko.utils.Constants.*;
+
 public class Camera {
     private GLU glu;
     private int windowWidth, windowHeight;
     private double fov = 45.0;
     private double near = 0.1;
     private double far = 1000.0;
-
     private double radius = 10.0;
     private double theta = 0.0;
     private double phi = 0.0;
@@ -42,6 +43,14 @@ public class Camera {
         double z = centerZ + radius * Math.cos(theta) * Math.cos(phi);
 
         glu.gluLookAt(x, y, z, centerX, centerY, centerZ, 0, 1, 0);
+    }
+
+    public void rotateByMouse(int deltaX, int deltaY) {
+        rotate(Math.toRadians(deltaX * ROTATION_SPEED), Math.toRadians(-deltaY * ROTATION_SPEED));
+    }
+
+    public void zoomByWheel(double wheelRotation) {
+        zoom(wheelRotation * ZOOM_SPEED);
     }
 
     public void rotate(double deltaTheta, double deltaPhi) {

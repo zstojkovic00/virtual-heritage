@@ -3,6 +3,8 @@ package com.zeljko.ui;
 
 import com.zeljko.core.Actuator;
 import com.zeljko.utils.ShapeType;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +13,8 @@ import java.awt.event.*;
 
 import static com.zeljko.utils.Constants.*;
 
+@Getter
+@Setter
 public class Gui {
     private JFrame frame;
     private JPanel panel;
@@ -103,27 +107,4 @@ public class Gui {
         return path + type.name().toLowerCase() + ".png";
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    public void setFrame(JFrame frame) {
-        this.frame = frame;
-    }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
-    public JMenuBar getMenuBar() {
-        return menuBar;
-    }
-
-    public void setMenuBar(JMenuBar menuBar) {
-        this.menuBar = menuBar;
-    }
 }

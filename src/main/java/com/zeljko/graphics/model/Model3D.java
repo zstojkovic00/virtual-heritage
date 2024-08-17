@@ -1,9 +1,20 @@
-package com.zeljko.graphics;
+package com.zeljko.graphics.model;
 
 import com.jogamp.opengl.GL2;
+import com.zeljko.graphics.Shape;
 import com.zeljko.utils.ShapeType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Model3D {
+
     private double width, height, depth;
     private double translateX, translateY, translateZ;
     private int rotationX, rotationY;
@@ -11,24 +22,45 @@ public class Model3D {
     private boolean isSelected;
     private ShapeType shapeType;
 
-    public void draw(GL2 gl) {
+    public void draw(GL2 gl, boolean isOutline) {
         gl.glPushMatrix();
-
         gl.glTranslated(translateX, translateY, translateZ);
-        gl.glScalef(scale, scale, scale);
         gl.glRotated(rotationX, 1, 0, 0);
         gl.glRotated(rotationY, 0, 1, 0);
+        gl.glScalef(scale, scale, scale);
 
-        gl.glColor3f(1, 1, 1);
+        if (isOutline) {
+            drawOutline(gl);
+        } else {
+            drawFilled(gl);
+        }
+
+        gl.glPopMatrix();
+    }
+
+    private void drawOutline(GL2 gl) {
+        if (width <= 0 || height <= 0 || depth <= 0) return;
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+        gl.glLineWidth(2);
+
+        if (shapeType == ShapeType.CUBOID) {
+            Shape.cuboid(gl, width, height, depth, false);
+        } else if (shapeType == ShapeType.CYLINDER) {
+            Shape.cylinder(gl, width / 2, height, 32, 32, 1, false);
+        }
+    }
+
+    private void drawFilled(GL2 gl) {
+        if (width <= 0 || height <= 0 || depth <= 0) return;
+
         gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
 
         if (shapeType == ShapeType.CUBOID) {
             Shape.cuboid(gl, width, height, depth, true);
         } else if (shapeType == ShapeType.CYLINDER) {
-            Shape.cylinder(gl, width/2, height, 32, 32, 1, true);
+            Shape.cylinder(gl, width / 2, height, 32, 32, 1, true);
         }
-
-        gl.glPopMatrix();
     }
 
     public Model3D(double width, double height, double depth, ShapeType shapeType) {
@@ -55,66 +87,8 @@ public class Model3D {
         this.rotationY += y;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
 
     public void scale(float factor) {
         this.scale *= factor;
     }
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public double getDepth() {
-        return depth;
-    }
-
-    public double getTranslateX() {
-        return translateX;
-    }
-
-    public double getTranslateY() {
-        return translateY;
-    }
-
-    public double getTranslateZ() {
-        return translateZ;
-    }
-
-    public int getRotationX() {
-        return rotationX;
-    }
-
-    public int getRotationY() {
-        return rotationY;
-    }
-
-    public float getScale() {
-        return scale;
-    }
-    public ShapeType getShapeType() {
-        return shapeType;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public void setDepth(double depth) {
-        this.depth = depth;
-    }
-
 }
