@@ -22,9 +22,8 @@ public class ApplicationState {
         this.userModels = new ArrayList<>();
     }
 
-    public void addModel(ShapeType shapeType) {
+    public boolean addModel(ShapeType shapeType) {
         if (canAddModel(shapeType)) {
-
             Model3D newModel = ModelFactory.createModel(shapeType);
 
             newModel.translate(Math.random() * 10 - 5,
@@ -34,10 +33,9 @@ public class ApplicationState {
             userModels.add(newModel);
 
             selectModel(userModels.size() - 1);
-
-        } else {
-            throw new IllegalStateException("Cannot add more models of this type");
+            return true;
         }
+        return false;
     }
 
     public boolean canAddModel(ShapeType type) {
@@ -54,6 +52,16 @@ public class ApplicationState {
         return userModels.stream()
                 .filter(m -> m.getShapeType() == type)
                 .count();
+    }
+
+    public long getRemainingModelCount(ShapeType type) {
+        long currentCount = userModels.stream().filter(m -> m.getShapeType() == type).count();
+        if (type == ShapeType.CUBOID) {
+            return currentBlueprint.getMaxCuboids() - currentCount;
+        } else if (type == ShapeType.CYLINDER) {
+            return currentBlueprint.getMaxCylinders() - currentCount;
+        }
+        return 0;
     }
 
     public void selectNextModel() {

@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="minor changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/test/AlignmentCheckerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/BlueprintTest.java" beforeDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="add test">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/GuiNotifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +22,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -43,7 +48,9 @@
     "Application.Project.executor": "Run",
     "Application.com.zeljko.Main.executor": "Run",
     "Application.ogl2.exam.Project.executor": "Run",
+    "JUnit.AlignmentCheckerTest.executor": "Run",
     "JUnit.AlignmentCheckerTest.testAllModelsAligned.executor": "Run",
+    "JUnit.AlignmentCheckerTest.testMisalignedModel.executor": "Run",
     "JUnit.BlueprintTest.executor": "Run",
     "JUnit.BlueprintTest.testAllModelsAligned.executor": "Debug",
     "JUnit.BlueprintTest.testModelFullyAligned.executor": "Run",
@@ -90,7 +97,7 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AlignmentCheckerTest">
+  <component name="RunManager">
     <configuration name="com.zeljko.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.zeljko.Main" />
       <module name="virtual-heritage" />
@@ -104,76 +111,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AlignmentCheckerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="virtual-heritage" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.AlignmentCheckerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AlignmentCheckerTest.testAllModelsAligned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="virtual-heritage" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.AlignmentCheckerTest" />
-      <option name="METHOD_NAME" value="testAllModelsAligned" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AlignmentCheckerTest.testMisalignedModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="virtual-heritage" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.AlignmentCheckerTest" />
-      <option name="METHOD_NAME" value="testMisalignedModel" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BlueprintTest.testAllModelsAligned" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="virtual-heritage" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.BlueprintTest" />
-      <option name="METHOD_NAME" value="testAllModelsAligned" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AlignmentCheckerTest" />
-        <item itemvalue="JUnit.AlignmentCheckerTest.testMisalignedModel" />
-        <item itemvalue="JUnit.AlignmentCheckerTest.testAllModelsAligned" />
         <item itemvalue="Application.com.zeljko.Main" />
-        <item itemvalue="JUnit.BlueprintTest.testAllModelsAligned" />
       </list>
     </recent_temporary>
   </component>
@@ -369,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723928440725</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="add test">
+      <option name="closed" value="true" />
+      <created>1723929053220</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1723929053220</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,7 +343,8 @@
     <MESSAGE value="script for starting docker" />
     <MESSAGE value="dd ApplicationState to centralize application state management" />
     <MESSAGE value="minor changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
+    <MESSAGE value="add test" />
+    <option name="LAST_COMMIT_MESSAGE" value="add test" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

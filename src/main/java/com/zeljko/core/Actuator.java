@@ -6,9 +6,11 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
+import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.ui.Gui;
 import com.zeljko.utils.AlignmentChecker;
 import com.zeljko.utils.BlueprintFactory;
+import lombok.Getter;
 
 
 import javax.swing.*;
@@ -19,6 +21,8 @@ import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
 import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 
 public class Actuator implements GLEventListener {
+
+    @Getter
     private final ApplicationState applicationState;
     private final InputListener inputListener;
     private final Camera camera;
@@ -37,6 +41,8 @@ public class Actuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.applicationState = new ApplicationState();
+        Blueprint blueprint = BlueprintFactory.createTreeBlueprint();
+        this.applicationState.setCurrentBlueprint(blueprint);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(applicationState, camera);
         this.light = new Light();
@@ -76,7 +82,6 @@ public class Actuator implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
         gl.glClearColor(0, 0, 0, 0);
 
-        applicationState.setCurrentBlueprint(BlueprintFactory.createTreeBlueprint());
         light.setupLighting(gl);
     }
 

@@ -2,18 +2,20 @@ package com.zeljko.core;
 
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.ui.GuiNotifier;
 import com.zeljko.utils.ShapeType;
+import lombok.Setter;
 
+import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 
-// separate class for Mouse and Key Listener?
 public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener, MouseWheelListener {
-
     private final ApplicationState applicationState;
+
+    @Setter
+    private GuiNotifier notifier;
     private final Camera camera;
     private boolean isLeftMouseButtonPressed = false;
     private int lastMouseX;
@@ -110,7 +112,10 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     public void actionPerformed(ActionEvent e) {
         String type = e.getActionCommand();
         ShapeType shapeType = ShapeType.valueOf(type);
-        applicationState.addModel(shapeType);
+        boolean isAdded = applicationState.addModel(shapeType);
+        if (!isAdded) {
+            notifier.notify("Cannot add more " + shapeType, "Model Constraint", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 

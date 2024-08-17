@@ -2,6 +2,7 @@ package com.zeljko.ui;
 
 
 import com.zeljko.core.Actuator;
+import com.zeljko.core.InputListener;
 import com.zeljko.utils.ShapeType;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,24 +11,29 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.zeljko.utils.Constants.*;
 
 @Getter
 @Setter
-public class Gui {
+public class Gui implements GuiNotifier {
+
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
     private Actuator actuator;
+    private Map<String, JLabel> modelCount = new HashMap<>();
 
-    public Gui(JFrame frame, ActionListener actionListener, Actuator actuator) {
+    public Gui(JFrame frame, InputListener inputListener, Actuator actuator) {
         this.frame = frame;
         this.actuator = actuator;
-        initUI(actionListener);
+        inputListener.setNotifier(this);
+        initUI(inputListener);
     }
 
-    private void initUI(ActionListener actionListener) {
+    private void initUI(InputListener inputListener) {
         menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem newGameItem = new JMenuItem("New Game");
@@ -53,22 +59,30 @@ public class Gui {
 
 
         JPanel cuboid = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CUBOID),
-                150, 150), actionListener, ShapeType.CUBOID.name());
+                150, 150), inputListener, ShapeType.CUBOID.name());
 
         JPanel cylinder = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CYLINDER),
-                225, 135), actionListener, ShapeType.CYLINDER.name());
+                225, 135), inputListener, ShapeType.CYLINDER.name());
 
         panel.add(cuboid);
         panel.add(cylinder);
         panel.add(checkAlignmentButton);
     }
 
-    private JPanel createPanel(ImageIcon image, ActionListener actionListener, String type) {
+    private JPanel createPanel(ImageIcon image, InputListener inputListener, String type) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         JLabel imageLabel = new JLabel(image);
-        JLabel numberLabel = new JLabel("N");
+        JLabel numberLabel = new JLabel();
         numberLabel.setFont(new Font("Arial", Font.BOLD, 20));
+
+        if (type.equals(ShapeType.CUBOID.name())) {
+            numberLabel.setText(String.valueOf(actuator.getApplicationState().getCurrentBlueprint().getMaxCuboids()));
+        } else if (type.equals(ShapeType.CYLINDER.name())) {
+            numberLabel.setText(String.valueOf(actuator.getApplicationState().getCurrentBlueprint().getMaxCylinders()));
+        }
+
+        modelCount.put(type, numberLabel);
 
         panel.add(imageLabel);
         panel.add(numberLabel);
@@ -89,11 +103,24 @@ public class Gui {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                actionListener.actionPerformed(new ActionEvent(panel, ActionEvent.ACTION_PERFORMED, type));
+                inputListener.actionPerformed(new ActionEvent(panel, ActionEvent.ACTION_PERFORMED, type));
+                updateModelCount();
             }
         });
 
         return panel;
+    }
+
+    @Override
+    public void notify(String message, String reason, int jOptionPane) {
+        JOptionPane.showMessageDialog(frame, message, reason, jOptionPane);
+    }
+
+    private void updateModelCount() {
+        for (ShapeType type : ShapeType.values()) {
+            long count = actuator.getApplicationState().getRemainingModelCount(type);
+            modelCount.get(type.name()).setText(Long.toString(count));
+        }
     }
 
     private ImageIcon resizeImage(String path, int width, int height) {
