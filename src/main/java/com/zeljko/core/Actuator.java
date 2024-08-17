@@ -19,11 +19,11 @@ import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
 import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 
 public class Actuator implements GLEventListener {
-    private Gui gui;
     private final ApplicationState applicationState;
-    private final Renderer renderer;
-    private final Camera camera;
     private final InputListener inputListener;
+    private final Camera camera;
+    private Gui gui;
+    private final Renderer renderer;
     private final Light light;
     private GLCanvas canvas;
     private FPSAnimator animator;
@@ -77,9 +77,7 @@ public class Actuator implements GLEventListener {
         gl.glClearColor(0, 0, 0, 0);
 
         applicationState.setCurrentBlueprint(BlueprintFactory.createTreeBlueprint());
-
         light.setupLighting(gl);
-
     }
 
     @Override
@@ -91,11 +89,9 @@ public class Actuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.applyViewTransform(gl);
 
-
         if (applicationState.getCurrentBlueprint() != null) {
             renderer.renderScene(gl, applicationState.getCurrentBlueprint(), applicationState.getUserModels());
         }
-
     }
 
     public boolean checkAlignment() {

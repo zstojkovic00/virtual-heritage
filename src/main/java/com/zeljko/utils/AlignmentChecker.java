@@ -3,9 +3,9 @@ package com.zeljko.utils;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static jogamp.opengl.glu.nurbs.Knotvector.TOLERANCE;
 
 public class AlignmentChecker {
 

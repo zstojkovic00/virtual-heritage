@@ -97,7 +97,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
                 break;
 
             // Select model
-            case KeyEvent.VK_TAB:
+            case KeyEvent.VK_O:
                 applicationState.selectNextModel();
                 break;
 

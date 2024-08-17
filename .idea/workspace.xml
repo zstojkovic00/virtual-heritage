@@ -4,23 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/AlignmentChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ModelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="dd ApplicationState to centralize application state management">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/ShapeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/BlueprintTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/BlueprintTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/AlignmentChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/AlignmentChecker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723416492771</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="dd ApplicationState to centralize application state management">
+      <option name="closed" value="true" />
+      <created>1723928141565</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1723928141565</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,7 +369,8 @@
     <MESSAGE value="add cylinder blueprint" />
     <MESSAGE value="add docker for gui app" />
     <MESSAGE value="script for starting docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="script for starting docker" />
+    <MESSAGE value="dd ApplicationState to centralize application state management" />
+    <option name="LAST_COMMIT_MESSAGE" value="dd ApplicationState to centralize application state management" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

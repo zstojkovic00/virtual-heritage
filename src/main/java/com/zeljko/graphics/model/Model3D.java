@@ -87,7 +87,6 @@ public class Model3D {
         this.rotationY += y;
     }
 
-
     public void scale(float factor) {
         this.scale *= factor;
     }
