@@ -59,6 +59,7 @@ public class GameActuator implements GLEventListener {
 
             animator = new FPSAnimator(canvas, 60);
             gui = new Gui(frame, inputListener, this);
+            GameAction.updateModelConstraints(gui::updateModelCount);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
             frame.add(gui.getPanel(), BorderLayout.SOUTH);

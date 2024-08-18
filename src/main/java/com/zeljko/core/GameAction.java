@@ -15,6 +15,12 @@ import static jogamp.opengl.glu.nurbs.Knotvector.TOLERANCE;
 
 public class GameAction {
 
+    private static Runnable onAutocompleteFinished;
+
+    public static void updateModelConstraints(Runnable callback) {
+        GameAction.onAutocompleteFinished = callback;
+    }
+
     public static boolean checkAlignment(Blueprint blueprint, List<Model3D> userModels) {
         if (userModels.size() != blueprint.getBlueprintModels().size()) return false;
 
@@ -105,6 +111,10 @@ public class GameAction {
             }
 
             startAutocompleteWithAnimation(modelToAlign, blueprintModel, gameActuator);
+
+            if (onAutocompleteFinished != null) {
+                SwingUtilities.invokeLater(onAutocompleteFinished);
+            }
         }
     }
 

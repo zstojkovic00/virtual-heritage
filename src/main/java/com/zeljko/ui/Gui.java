@@ -133,7 +133,8 @@ public class Gui implements GuiNotifier {
         JOptionPane.showMessageDialog(frame, message, reason, jOptionPane);
     }
 
-    private void updateModelCount() {
+
+    public void updateModelCount() {
         for (ShapeType type : ShapeType.values()) {
             long count = gameActuator.getGameState().getRemainingModelCount(type);
             modelCount.get(type.name()).setText(Long.toString(count));
