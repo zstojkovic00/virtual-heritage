@@ -16,4 +16,5 @@ public class Constants {
     public static final Color BLACK = new Color(100, 100, 100);
     public static final Color GRAY = new Color(200, 200, 200);
     public static final String IMAGE_PATH = "src/main/java/resources/images/";
+    public static final String TEXTURE_PATH = "src/main/java/resources/textures/";
 }

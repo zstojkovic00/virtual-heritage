@@ -4,13 +4,39 @@ package com.zeljko.utils;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
 
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BlueprintFactory {
 
+    private static final Map<BlueprintType, Map<ShapeType, String>> textureMap = new HashMap<>();
+
+    static {
+        initializeTextures();
+    }
+
+    public static Blueprint createBlueprint(BlueprintType type) {
+        switch (type) {
+            case CAR:
+                return createCar();
+            case TREE:
+                return createTree();
+            default:
+                throw new IllegalArgumentException("Unsupported blueprint type");
+        }
+    }
+
+    private static Blueprint createTree() {
+
+        return null;
+    }
+
     public static Blueprint createCar() {
-        Blueprint blueprint = new Blueprint(1, 4);
+        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 1, 4);
 
         Model3D body = ModelFactory.createModel(ShapeType.CUBOID);
-        body.translate(0,0,0);
+        body.translate(0, 0, 0);
         blueprint.addModel(body);
 
 
@@ -34,6 +60,22 @@ public class BlueprintFactory {
         blueprint.addModel(gum_4);
 
         return blueprint;
+    }
+
+
+    private static void initializeTextures() {
+        Map<ShapeType, String> carTextures = new EnumMap<>(ShapeType.class);
+        carTextures.put(ShapeType.CUBOID, "green.png");
+        carTextures.put(ShapeType.CYLINDER, "green.png");
+        textureMap.put(BlueprintType.CAR, carTextures);
+    }
+
+    public static String getTextureForShape(BlueprintType blueprintType, ShapeType shapeType) {
+        Map<ShapeType, String> textures = textureMap.get(blueprintType);
+        if (textures != null) {
+            return textures.get(shapeType);
+        }
+        return null;
     }
 
 }

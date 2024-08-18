@@ -3,6 +3,7 @@ package com.zeljko.core;
 import com.jogamp.opengl.GL2;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.utils.TextureLoader;
 
 import java.util.List;
 
@@ -29,7 +30,16 @@ public class Renderer {
             } else {
                 gl.glColor3f(0.5f, 0.5f, 0.5f);
             }
+
+            if (model.getTextureName() != null) {
+                TextureLoader.bindTexture(gl, model.getTextureName());
+            }
+
             model.draw(gl, false);
+
+            if (model.getTextureName() != null) {
+                TextureLoader.unbindTexture(gl);
+            }
         }
     }
 }

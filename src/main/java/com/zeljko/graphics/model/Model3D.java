@@ -21,6 +21,7 @@ public class Model3D {
     private float scale;
     private boolean isSelected;
     private ShapeType shapeType;
+    private String textureName;
 
     public void draw(GL2 gl, boolean isOutline) {
         gl.glPushMatrix();
@@ -74,6 +75,7 @@ public class Model3D {
         this.rotationY = 0;
         this.scale = 1.0f;
         this.shapeType = shapeType;
+        this.textureName = null;
     }
 
     public void translate(double x, double y, double z) {

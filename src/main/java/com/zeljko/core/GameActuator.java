@@ -6,9 +6,9 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
-import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.ui.Gui;
-import com.zeljko.utils.BlueprintFactory;
+import com.zeljko.utils.BlueprintType;
+import com.zeljko.utils.TextureLoader;
 import lombok.Getter;
 
 
@@ -40,8 +40,7 @@ public class GameActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.gameState = new GameState();
-        Blueprint blueprint = BlueprintFactory.createCar();
-        this.gameState.setCurrentBlueprint(blueprint);
+        this.gameState.setCurrentBlueprint(BlueprintType.CAR);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(gameState, camera);
         this.light = new Light();
@@ -84,6 +83,7 @@ public class GameActuator implements GLEventListener {
         gl.glClearColor(0, 0, 0, 0);
 
         light.setupLighting(gl);
+        TextureLoader.loadAllTextures(gl);
     }
 
     @Override

@@ -3,6 +3,7 @@ package test;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
 import com.zeljko.core.GameAction;
+import com.zeljko.utils.BlueprintType;
 import com.zeljko.utils.ShapeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class GameActionTest {
 
     @BeforeEach
     void setUp() {
-        blueprint = new Blueprint(2, 1);
+        blueprint = new Blueprint(BlueprintType.CAR, 2, 1);
         userModels = new ArrayList<>();
 
         Model3D CUBOID_1 = new Model3D(1.0, 1.0, 1.0, ShapeType.CUBOID);

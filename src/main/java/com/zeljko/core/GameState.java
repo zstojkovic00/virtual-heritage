@@ -2,6 +2,8 @@ package com.zeljko.core;
 
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.utils.BlueprintFactory;
+import com.zeljko.utils.BlueprintType;
 import com.zeljko.utils.ModelFactory;
 import com.zeljko.utils.ShapeType;
 import lombok.Getter;
@@ -18,6 +20,10 @@ public class GameState {
     private List<Model3D> userModels;
     private int currentModelIndex;
 
+    public void setCurrentBlueprint(BlueprintType type) {
+        this.currentBlueprint = BlueprintFactory.createBlueprint(type);
+    }
+
     public GameState() {
         this.userModels = new ArrayList<>();
     }
@@ -25,6 +31,11 @@ public class GameState {
     public boolean addModel(ShapeType shapeType) {
         if (canAddModel(shapeType)) {
             Model3D newModel = ModelFactory.createModel(shapeType);
+
+            if (currentBlueprint != null) {
+                String texture = BlueprintFactory.getTextureForShape(currentBlueprint.getBlueprintType(), shapeType);
+                newModel.setTextureName(texture);
+            }
 
             newModel.translate(Math.random() * 10 - 5,
                     Math.random() * 10 - 5,
@@ -41,9 +52,9 @@ public class GameState {
     public boolean canAddModel(ShapeType type) {
         long currentCount = countModels(type);
         if (type == ShapeType.CUBOID) {
-            return currentCount < currentBlueprint.getMaxCuboids();
+            return currentCount < currentBlueprint.getNumberOfCuboids();
         } else if (type == ShapeType.CYLINDER) {
-            return currentCount < currentBlueprint.getMaxCylinders();
+            return currentCount < currentBlueprint.getNumberOfCylinders();
         }
         return false;
     }
@@ -57,9 +68,9 @@ public class GameState {
     public long getRemainingModelCount(ShapeType type) {
         long currentCount = userModels.stream().filter(m -> m.getShapeType() == type).count();
         if (type == ShapeType.CUBOID) {
-            return currentBlueprint.getMaxCuboids() - currentCount;
+            return currentBlueprint.getNumberOfCuboids() - currentCount;
         } else if (type == ShapeType.CYLINDER) {
-            return currentBlueprint.getMaxCylinders() - currentCount;
+            return currentBlueprint.getNumberOfCylinders() - currentCount;
         }
         return 0;
     }

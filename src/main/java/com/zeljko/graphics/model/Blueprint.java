@@ -1,16 +1,12 @@
 package com.zeljko.graphics.model;
 
-import com.jogamp.opengl.GL2;
-import com.zeljko.graphics.Shape;
-import com.zeljko.graphics.model.Model3D;
-import com.zeljko.utils.ShapeType;
+import com.zeljko.utils.BlueprintType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -21,13 +17,15 @@ import java.util.List;
 public class Blueprint {
 
     private final List<Model3D> blueprintModels;
-    private int maxCuboids;
-    private int maxCylinders;
+    private BlueprintType blueprintType;
+    private int numberOfCuboids;
+    private int numberOfCylinders;
 
-    public Blueprint(int maxCuboids, int maxCylinders) {
+    public Blueprint(BlueprintType blueprintType, int numberOfCuboids, int numberOfCylinders) {
         this.blueprintModels = new ArrayList<>();
-        this.maxCuboids = maxCuboids;
-        this.maxCylinders = maxCylinders;
+        this.blueprintType = blueprintType;
+        this.numberOfCuboids = numberOfCuboids;
+        this.numberOfCylinders = numberOfCylinders;
     }
 
     public void addModel(Model3D model) {

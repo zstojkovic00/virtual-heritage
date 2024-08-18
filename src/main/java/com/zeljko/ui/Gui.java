@@ -94,9 +94,9 @@ public class Gui implements GuiNotifier {
         numberLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
         if (type.equals(ShapeType.CUBOID.name())) {
-            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getMaxCuboids()));
+            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getNumberOfCuboids()));
         } else if (type.equals(ShapeType.CYLINDER.name())) {
-            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getMaxCylinders()));
+            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getNumberOfCylinders()));
         }
 
         modelCount.put(type, numberLabel);
