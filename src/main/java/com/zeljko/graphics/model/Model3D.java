@@ -17,7 +17,7 @@ public class Model3D {
 
     private double width, height, depth;
     private double translateX, translateY, translateZ;
-    private int rotationX, rotationY;
+    private double rotationX, rotationY;
     private float scale;
     private boolean isSelected;
     private ShapeType shapeType;

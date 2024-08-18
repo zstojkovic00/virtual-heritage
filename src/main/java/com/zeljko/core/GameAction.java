@@ -138,10 +138,15 @@ public class GameAction {
             SwingUtilities.invokeLater(() -> {
                 double[] newPosition = new double[3];
                 double[] newSize = new double[3];
+                double[] newRotation = new double[2];
 
                 for (int j = 0; j < 3; j++) {
                     newPosition[j] = unalignedModelPosition[j] + (blueprintModelPosition[j] - unalignedModelPosition[j]) * progress;
                     newSize[j] = unalignedModelSize[j] + (blueprintModelSize[j] - unalignedModelSize[j]) * progress;
+
+                    if (j < 2) {
+                        newRotation[j] = unalignedModelRotation[j] + (blueprintModelRotation[j] - unalignedModelRotation[j]) * progress;
+                    }
                 }
 
                 model.setTranslateX(newPosition[0]);
@@ -152,6 +157,9 @@ public class GameAction {
                 model.setWidth(newSize[0]);
                 model.setHeight(newSize[1]);
                 model.setDepth(newSize[2]);
+
+                model.setRotationX(newRotation[0]);
+                model.setRotationY(newRotation[1]);
 
                 gameActuator.requestRender();
             });

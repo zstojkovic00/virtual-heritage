@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="update model constraints on autocomplete finish">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/TextureLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/green.png" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Add texture mapping based on blueprint type in BlueprintFactory">
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/rock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/wood.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Blueprint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Blueprint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/GameActionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/GameActionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/textures/green.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/textures/grass.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,14 +358,21 @@
       <option name="project" value="LOCAL" />
       <updated>1723943338434</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add texture mapping based on blueprint type in BlueprintFactory">
+      <option name="closed" value="true" />
+      <created>1723994519710</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1723994519710</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial working version" />
     <MESSAGE value="Initialize OpenGL settings for 3D rendering" />
     <MESSAGE value="Load your own 3d model with custom parser for .obj file" />
     <MESSAGE value="Add camera and shape class" />
@@ -396,7 +397,8 @@
     <MESSAGE value="autocomplete working version without size and rotation" />
     <MESSAGE value="+ size" />
     <MESSAGE value="update model constraints on autocomplete finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="update model constraints on autocomplete finish" />
+    <MESSAGE value="Add texture mapping based on blueprint type in BlueprintFactory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add texture mapping based on blueprint type in BlueprintFactory" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
