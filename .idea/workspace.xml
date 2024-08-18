@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="initial version of autocomplete action">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="autocomplete working version without size and rotation">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723939720716</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="autocomplete working version without size and rotation">
+      <option name="closed" value="true" />
+      <created>1723942344681</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1723942344681</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +365,8 @@
     <MESSAGE value="add test" />
     <MESSAGE value="Add GuiNotifier interface for displaying messages" />
     <MESSAGE value="initial version of autocomplete action" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial version of autocomplete action" />
+    <MESSAGE value="autocomplete working version without size and rotation" />
+    <option name="LAST_COMMIT_MESSAGE" value="autocomplete working version without size and rotation" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

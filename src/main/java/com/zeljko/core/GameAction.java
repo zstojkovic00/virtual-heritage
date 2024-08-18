@@ -113,29 +113,37 @@ public class GameAction {
         double[] unalignedModelPosition = {model.getTranslateX(), model.getTranslateY(), model.getTranslateZ()};
         double[] blueprintModelPosition = {blueprint.getTranslateX(), blueprint.getTranslateY(), blueprint.getTranslateZ()};
 
+        double[] unalignedModelSize = {model.getWidth(), model.getHeight(), model.getDepth()};
+        double[] blueprintModelSize = {blueprint.getWidth(), blueprint.getHeight(), blueprint.getDepth()};
+
+        double[] unalignedModelRotation = {model.getRotationX(), model.getRotationY()};
+        double[] blueprintModelRotation = {blueprint.getRotationX(), blueprint.getRotationY()};
+
 
         int steps = 60;
         long delay = 16;
 
         for (int i = 0; i <= steps; i++) {
             final double progress = (double) i / steps;
-            final int step = i;
             SwingUtilities.invokeLater(() -> {
                 double[] newPosition = new double[3];
+                double[] newSize = new double[3];
+
                 for (int j = 0; j < 3; j++) {
                     newPosition[j] = unalignedModelPosition[j] + (blueprintModelPosition[j] - unalignedModelPosition[j]) * progress;
+                    newSize[j] = unalignedModelSize[j] + (blueprintModelSize[j] - unalignedModelSize[j]) * progress;
                 }
 
                 model.setTranslateX(newPosition[0]);
                 model.setTranslateY(newPosition[1]);
                 model.setTranslateZ(newPosition[2]);
 
-                gameActuator.requestRender();
 
-                if (step == steps) {
-                    System.out.println("Animation completed. Final position: (" +
-                            newPosition[0] + ", " + newPosition[1] + ", " + newPosition[2] + ")");
-                }
+                model.setWidth(newSize[0]);
+                model.setHeight(newSize[1]);
+                model.setDepth(newSize[2]);
+
+                gameActuator.requestRender();
             });
 
             Thread.sleep(delay);
