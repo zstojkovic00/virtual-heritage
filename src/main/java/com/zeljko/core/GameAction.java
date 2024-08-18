@@ -6,6 +6,7 @@ import com.zeljko.utils.ShapeType;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -69,50 +70,72 @@ public class GameAction {
     }
 
 
-    public static boolean startAutocomplete(GameActuator gameActuator, GameState gameState) {
-        List<Model3D> userModels = gameState.getUserModels();
+    public static void startAutocomplete(GameActuator gameActuator, GameState gameState) {
+        List<Model3D> userModels = new ArrayList<>(gameState.getUserModels());
         List<Model3D> blueprintModels = gameState.getCurrentBlueprint().getBlueprintModels();
 
-        for (Model3D blueprintModel : blueprintModels) {
+        System.out.println("Starting autocomplete. User models: " + userModels.size() + ", Blueprint models: " + blueprintModels.size());
+
+        for (int i = 0; i < blueprintModels.size(); i++) {
+            Model3D blueprintModel = blueprintModels.get(i);
             ShapeType type = blueprintModel.getShapeType();
+
+            System.out.println("Processing blueprint model " + i + " of type: " + type);
 
             Optional<Model3D> unalignedModel = userModels.stream()
                     .filter(getUnalignedModel(blueprintModel, type))
                     .findFirst();
 
-            if (unalignedModel.isPresent()) {
-                startAutocompleteWithAnimation(unalignedModel.get(), blueprintModel, gameActuator);
-            }
-        }
+            Model3D modelToAlign;
 
-        return checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
+            if (unalignedModel.isPresent()) {
+                modelToAlign = unalignedModel.get();
+                System.out.println("Found unaligned model of type: " + type);
+                userModels.remove(modelToAlign);
+            } else if (gameState.canAddModel(type)) {
+                System.out.println("No unaligned model found. Adding new model of type: " + type);
+                boolean added = gameState.addModel(type);
+                if (!added) {
+                    System.out.println("Failed to add new model of type: " + type);
+                    continue;
+                }
+                modelToAlign = gameState.getUserModels().get(gameState.getUserModels().size() - 1);
+            } else {
+                continue;
+            }
+
+            startAutocompleteWithAnimation(modelToAlign, blueprintModel, gameActuator);
+        }
     }
 
     @SneakyThrows
     private static void startAutocompleteWithAnimation(Model3D model, Model3D blueprint, GameActuator gameActuator) {
-        double startX = model.getTranslateX();
-        double startY = model.getTranslateY();
-        double startZ = model.getTranslateZ();
+        double[] unalignedModelPosition = {model.getTranslateX(), model.getTranslateY(), model.getTranslateZ()};
+        double[] blueprintModelPosition = {blueprint.getTranslateX(), blueprint.getTranslateY(), blueprint.getTranslateZ()};
 
-        double endX = blueprint.getTranslateX();
-        double endY = blueprint.getTranslateY();
-        double endZ = blueprint.getTranslateZ();
 
         int steps = 60;
         long delay = 16;
 
         for (int i = 0; i <= steps; i++) {
             final double progress = (double) i / steps;
+            final int step = i;
             SwingUtilities.invokeLater(() -> {
-                double newX = startX + (endX - startX) * progress;
-                double newY = startY + (endY - startY) * progress;
-                double newZ = startZ + (endZ - startZ) * progress;
+                double[] newPosition = new double[3];
+                for (int j = 0; j < 3; j++) {
+                    newPosition[j] = unalignedModelPosition[j] + (blueprintModelPosition[j] - unalignedModelPosition[j]) * progress;
+                }
 
-                model.setTranslateX(newX);
-                model.setTranslateY(newY);
-                model.setTranslateZ(newZ);
+                model.setTranslateX(newPosition[0]);
+                model.setTranslateY(newPosition[1]);
+                model.setTranslateZ(newPosition[2]);
 
                 gameActuator.requestRender();
+
+                if (step == steps) {
+                    System.out.println("Animation completed. Final position: (" +
+                            newPosition[0] + ", " + newPosition[1] + ", " + newPosition[2] + ")");
+                }
             });
 
             Thread.sleep(delay);

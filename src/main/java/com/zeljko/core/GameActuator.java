@@ -40,7 +40,7 @@ public class GameActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.gameState = new GameState();
-        Blueprint blueprint = BlueprintFactory.createTreeBlueprint();
+        Blueprint blueprint = BlueprintFactory.createCar();
         this.gameState.setCurrentBlueprint(blueprint);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(gameState, camera);
