@@ -12,7 +12,7 @@ import java.awt.event.*;
 import static com.zeljko.utils.Constants.UNIT_MOVEMENT;
 
 public class InputListener implements KeyListener, ActionListener, MouseListener, MouseMotionListener, MouseWheelListener {
-    private final ApplicationState applicationState;
+    private final GameState gameState;
 
     @Setter
     private GuiNotifier notifier;
@@ -21,8 +21,8 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     private int lastMouseX;
     private int lastMouseY;
 
-    public InputListener(ApplicationState applicationState, Camera camera) {
-        this.applicationState = applicationState;
+    public InputListener(GameState gameState, Camera camera) {
+        this.gameState = gameState;
         this.camera = camera;
     }
 
@@ -30,7 +30,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        Model3D currentModel = applicationState.getCurrentModel();
+        Model3D currentModel = gameState.getCurrentModel();
         if (currentModel == null) return;
 
 
@@ -100,7 +100,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
 
             // Select model
             case KeyEvent.VK_O:
-                applicationState.selectNextModel();
+                gameState.selectNextModel();
                 break;
 
             case KeyEvent.VK_ESCAPE:
@@ -112,7 +112,7 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
     public void actionPerformed(ActionEvent e) {
         String type = e.getActionCommand();
         ShapeType shapeType = ShapeType.valueOf(type);
-        boolean isAdded = applicationState.addModel(shapeType);
+        boolean isAdded = gameState.addModel(shapeType);
         if (!isAdded) {
             notifier.notify("Cannot add more " + shapeType, "Model Constraint", JOptionPane.WARNING_MESSAGE);
         }

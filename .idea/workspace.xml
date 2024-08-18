@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="add test">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/GuiNotifier.java" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Add GuiNotifier interface for displaying messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Actuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/ApplicationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/AlignmentChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/AlignmentCheckerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/GameActionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723929053220</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Add GuiNotifier interface for displaying messages">
+      <option name="closed" value="true" />
+      <created>1723931476830</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1723931476830</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +354,8 @@
     <MESSAGE value="dd ApplicationState to centralize application state management" />
     <MESSAGE value="minor changes" />
     <MESSAGE value="add test" />
-    <option name="LAST_COMMIT_MESSAGE" value="add test" />
+    <MESSAGE value="Add GuiNotifier interface for displaying messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add GuiNotifier interface for displaying messages" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

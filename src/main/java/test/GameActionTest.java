@@ -2,7 +2,7 @@ package test;
 
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
-import com.zeljko.utils.AlignmentChecker;
+import com.zeljko.core.GameAction;
 import com.zeljko.utils.ShapeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AlignmentCheckerTest {
+class GameActionTest {
     private Blueprint blueprint;
     private List<Model3D> userModels;
 
@@ -49,7 +49,7 @@ class AlignmentCheckerTest {
         USER_CYLINDER_1.translate(0, 2, 0);
         userModels.add(USER_CYLINDER_1);
 
-        assertTrue(AlignmentChecker.areAllModelsAligned(blueprint, userModels));
+        assertTrue(GameAction.checkAlignment(blueprint, userModels));
     }
 
     @Test
@@ -66,7 +66,7 @@ class AlignmentCheckerTest {
         USER_CYLINDER_1.translate(0, 2, 0);
         userModels.add(USER_CYLINDER_1);
 
-        assertFalse(AlignmentChecker.areAllModelsAligned(blueprint, userModels));
+        assertFalse(GameAction.checkAlignment(blueprint, userModels));
     }
 
     @Test
@@ -83,7 +83,7 @@ class AlignmentCheckerTest {
         USER_WRONG_SHAPE.translate(0, 2, 0);
         userModels.add(USER_WRONG_SHAPE);
 
-        assertFalse(AlignmentChecker.areAllModelsAligned(blueprint, userModels));
+        assertFalse(GameAction.checkAlignment(blueprint, userModels));
     }
 
 }

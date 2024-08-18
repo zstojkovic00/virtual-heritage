@@ -12,13 +12,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ApplicationState {
+public class GameState {
 
     private Blueprint currentBlueprint;
     private List<Model3D> userModels;
     private int currentModelIndex;
 
-    public ApplicationState() {
+    public GameState() {
         this.userModels = new ArrayList<>();
     }
 

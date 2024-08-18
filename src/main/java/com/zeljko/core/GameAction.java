@@ -1,15 +1,20 @@
-package com.zeljko.utils;
+package com.zeljko.core;
 
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.utils.ShapeType;
+import lombok.SneakyThrows;
 
+import javax.swing.*;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import static jogamp.opengl.glu.nurbs.Knotvector.TOLERANCE;
 
-public class AlignmentChecker {
+public class GameAction {
 
-    public static boolean areAllModelsAligned(Blueprint blueprint, List<Model3D> userModels) {
+    public static boolean checkAlignment(Blueprint blueprint, List<Model3D> userModels) {
         if (userModels.size() != blueprint.getBlueprintModels().size()) return false;
 
         return userModels.stream()
@@ -61,5 +66,61 @@ public class AlignmentChecker {
         }
 
         return size && position;
+    }
+
+
+    public static boolean startAutocomplete(GameActuator gameActuator, GameState gameState) {
+        List<Model3D> userModels = gameState.getUserModels();
+        List<Model3D> blueprintModels = gameState.getCurrentBlueprint().getBlueprintModels();
+
+        for (Model3D blueprintModel : blueprintModels) {
+            ShapeType type = blueprintModel.getShapeType();
+
+            Optional<Model3D> unalignedModel = userModels.stream()
+                    .filter(getUnalignedModel(blueprintModel, type))
+                    .findFirst();
+
+            if (unalignedModel.isPresent()) {
+                startAutocompleteWithAnimation(unalignedModel.get(), blueprintModel, gameActuator);
+            }
+        }
+
+        return checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
+    }
+
+    @SneakyThrows
+    private static void startAutocompleteWithAnimation(Model3D model, Model3D blueprint, GameActuator gameActuator) {
+        double startX = model.getTranslateX();
+        double startY = model.getTranslateY();
+        double startZ = model.getTranslateZ();
+
+        double endX = blueprint.getTranslateX();
+        double endY = blueprint.getTranslateY();
+        double endZ = blueprint.getTranslateZ();
+
+        int steps = 60;
+        long delay = 16;
+
+        for (int i = 0; i <= steps; i++) {
+            final double progress = (double) i / steps;
+            SwingUtilities.invokeLater(() -> {
+                double newX = startX + (endX - startX) * progress;
+                double newY = startY + (endY - startY) * progress;
+                double newZ = startZ + (endZ - startZ) * progress;
+
+                model.setTranslateX(newX);
+                model.setTranslateY(newY);
+                model.setTranslateZ(newZ);
+
+                gameActuator.requestRender();
+            });
+
+            Thread.sleep(delay);
+        }
+    }
+
+    private static Predicate<Model3D> getUnalignedModel(Model3D blueprintModel, ShapeType type) {
+        return model -> model.getShapeType() == type
+                && !isModelAlignedWithBlueprint(model, blueprintModel);
     }
 }

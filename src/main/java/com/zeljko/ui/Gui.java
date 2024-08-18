@@ -1,7 +1,7 @@
 package com.zeljko.ui;
 
 
-import com.zeljko.core.Actuator;
+import com.zeljko.core.GameActuator;
 import com.zeljko.core.InputListener;
 import com.zeljko.utils.ShapeType;
 import lombok.Getter;
@@ -23,30 +23,47 @@ public class Gui implements GuiNotifier {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
-    private Actuator actuator;
+    private GameActuator gameActuator;
+    private JToolBar toolBar;
     private Map<String, JLabel> modelCount = new HashMap<>();
 
-    public Gui(JFrame frame, InputListener inputListener, Actuator actuator) {
+    public Gui(JFrame frame, InputListener inputListener, GameActuator gameActuator) {
         this.frame = frame;
-        this.actuator = actuator;
+        this.gameActuator = gameActuator;
         inputListener.setNotifier(this);
         initUI(inputListener);
     }
 
     private void initUI(InputListener inputListener) {
+        // File menu
         menuBar = new JMenuBar();
+        menuBar.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         JMenu fileMenu = new JMenu("File");
+
         JMenuItem newGameItem = new JMenuItem("New Game");
         JMenuItem exitItem = new JMenuItem("Exit");
-        JButton checkAlignmentButton = new JButton("Check Alignment");
 
         fileMenu.add(newGameItem);
         fileMenu.add(exitItem);
         menuBar.add(fileMenu);
 
+        // Toolbar
+        JButton checkAlignmentButton = new JButton("Check Alignment");
+        JButton autocompleteButton = new JButton("Autocomplete");
+
+        toolBar = new JToolBar();
+        toolBar.add(checkAlignmentButton);
+        toolBar.add(autocompleteButton);
+        toolBar.setFloatable(false);
+        toolBar.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+
+        autocompleteButton.addActionListener(e -> {
+            gameActuator.startAutocomplete();
+        });
 
         checkAlignmentButton.addActionListener(e -> {
-            boolean aligned = actuator.checkAlignment();
+            boolean aligned = gameActuator.checkAlignment();
             JOptionPane.showMessageDialog(frame,
                     aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned!",
                     "Alignment Check",
@@ -54,6 +71,7 @@ public class Gui implements GuiNotifier {
         });
 
 
+        // Panel
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -66,7 +84,6 @@ public class Gui implements GuiNotifier {
 
         panel.add(cuboid);
         panel.add(cylinder);
-        panel.add(checkAlignmentButton);
     }
 
     private JPanel createPanel(ImageIcon image, InputListener inputListener, String type) {
@@ -77,9 +94,9 @@ public class Gui implements GuiNotifier {
         numberLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
         if (type.equals(ShapeType.CUBOID.name())) {
-            numberLabel.setText(String.valueOf(actuator.getApplicationState().getCurrentBlueprint().getMaxCuboids()));
+            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getMaxCuboids()));
         } else if (type.equals(ShapeType.CYLINDER.name())) {
-            numberLabel.setText(String.valueOf(actuator.getApplicationState().getCurrentBlueprint().getMaxCylinders()));
+            numberLabel.setText(String.valueOf(gameActuator.getGameState().getCurrentBlueprint().getMaxCylinders()));
         }
 
         modelCount.put(type, numberLabel);
@@ -118,7 +135,7 @@ public class Gui implements GuiNotifier {
 
     private void updateModelCount() {
         for (ShapeType type : ShapeType.values()) {
-            long count = actuator.getApplicationState().getRemainingModelCount(type);
+            long count = gameActuator.getGameState().getRemainingModelCount(type);
             modelCount.get(type.name()).setText(Long.toString(count));
         }
     }

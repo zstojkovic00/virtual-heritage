@@ -8,7 +8,6 @@ import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.ui.Gui;
-import com.zeljko.utils.AlignmentChecker;
 import com.zeljko.utils.BlueprintFactory;
 import lombok.Getter;
 
@@ -20,10 +19,10 @@ import java.awt.*;
 import static com.zeljko.utils.Constants.WINDOW_HEIGHT;
 import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 
-public class Actuator implements GLEventListener {
+public class GameActuator implements GLEventListener {
 
     @Getter
-    private final ApplicationState applicationState;
+    private final GameState gameState;
     private final InputListener inputListener;
     private final Camera camera;
     private Gui gui;
@@ -32,7 +31,7 @@ public class Actuator implements GLEventListener {
     private GLCanvas canvas;
     private FPSAnimator animator;
 
-    public Actuator(JFrame frame) {
+    public GameActuator(JFrame frame) {
         GLProfile profile = GLProfile.getDefault();
         GLCapabilities caps = new GLCapabilities(profile);
         caps.setAlphaBits(8);
@@ -40,11 +39,11 @@ public class Actuator implements GLEventListener {
         caps.setDoubleBuffered(true);
         caps.setStencilBits(8);
 
-        this.applicationState = new ApplicationState();
+        this.gameState = new GameState();
         Blueprint blueprint = BlueprintFactory.createTreeBlueprint();
-        this.applicationState.setCurrentBlueprint(blueprint);
+        this.gameState.setCurrentBlueprint(blueprint);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.inputListener = new InputListener(applicationState, camera);
+        this.inputListener = new InputListener(gameState, camera);
         this.light = new Light();
         this.renderer = new Renderer();
 
@@ -63,6 +62,7 @@ public class Actuator implements GLEventListener {
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
             frame.add(gui.getPanel(), BorderLayout.SOUTH);
+            frame.add(gui.getToolBar(), BorderLayout.NORTH);
 
             camera.setCenter(0, 0, 0);
             camera.zoom(-2);
@@ -94,15 +94,24 @@ public class Actuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.applyViewTransform(gl);
 
-        if (applicationState.getCurrentBlueprint() != null) {
-            renderer.renderScene(gl, applicationState.getCurrentBlueprint(), applicationState.getUserModels());
+        if (gameState.getCurrentBlueprint() != null) {
+            renderer.renderScene(gl, gameState.getCurrentBlueprint(), gameState.getUserModels());
         }
     }
 
-    public boolean checkAlignment() {
-        return AlignmentChecker.areAllModelsAligned(applicationState.getCurrentBlueprint(), applicationState.getUserModels());
+    public void startAutocomplete() {
+        GameAction.startAutocomplete(this, gameState);
     }
 
+    public boolean checkAlignment() {
+        return GameAction.checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
+    }
+
+    public void requestRender() {
+        if (canvas != null) {
+            canvas.display();
+        }
+    }
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
