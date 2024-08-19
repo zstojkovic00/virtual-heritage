@@ -4,13 +4,12 @@ package com.zeljko.utils;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BlueprintFactory {
 
-    private static final Map<BlueprintType, Map<ShapeType, String>> textureMap = new HashMap<>();
+    private static final Map<BlueprintType, Map<String, String>> textureMap = new HashMap<>();
 
     static {
         initializeTextures();
@@ -94,22 +93,32 @@ public class BlueprintFactory {
 
 
     private static void initializeTextures() {
-        Map<ShapeType, String> carTextures = new EnumMap<>(ShapeType.class);
-        carTextures.put(ShapeType.CUBOID, "wood.png");
-        carTextures.put(ShapeType.CYLINDER, "grass.png");
+        Map<String, String> carTextures = new HashMap<>();
+        carTextures.put(ShapeType.CUBOID.name(), "wood.png");
+        carTextures.put(ShapeType.CYLINDER.name(), "grass.png");
+        carTextures.put("BACKGROUND", "car-background.png");
         textureMap.put(BlueprintType.CAR, carTextures);
 
 
-        Map<ShapeType, String> treeTextures = new EnumMap<>(ShapeType.class);
-        treeTextures.put(ShapeType.CUBOID, "grass.png");
-        treeTextures.put(ShapeType.CYLINDER, "wood.png");
+        Map<String, String> treeTextures = new HashMap<>();
+        treeTextures.put(ShapeType.CUBOID.name(), "grass.png");
+        treeTextures.put(ShapeType.CYLINDER.name(), "wood.png");
+        treeTextures.put("BACKGROUND", "tree-background.png");
         textureMap.put(BlueprintType.TREE, treeTextures);
     }
 
     public static String getTextureForShape(BlueprintType blueprintType, ShapeType shapeType) {
-        Map<ShapeType, String> textures = textureMap.get(blueprintType);
+        Map<String, String> textures = textureMap.get(blueprintType);
         if (textures != null) {
-            return textures.get(shapeType);
+            return textures.get(shapeType.name());
+        }
+        return null;
+    }
+
+    public static String getBackgroundForType(BlueprintType blueprintType) {
+        Map<String, String> textures = textureMap.get(blueprintType);
+        if (textures != null) {
+            return textures.get("BACKGROUND");
         }
         return null;
     }

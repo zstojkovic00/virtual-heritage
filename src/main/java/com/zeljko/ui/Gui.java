@@ -35,7 +35,6 @@ public class Gui implements GuiNotifier {
     }
 
     private void initUI(InputListener inputListener) {
-        // File menu
         menuBar = new JMenuBar();
         menuBar.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         JMenu fileMenu = new JMenu("File");
@@ -47,7 +46,7 @@ public class Gui implements GuiNotifier {
         fileMenu.add(exitItem);
         menuBar.add(fileMenu);
 
-        // Toolbar
+
         JButton checkAlignmentButton = new JButton("Check Alignment");
         JButton autocompleteButton = new JButton("Autocomplete");
 
@@ -71,7 +70,6 @@ public class Gui implements GuiNotifier {
         });
 
 
-        // Panel
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 

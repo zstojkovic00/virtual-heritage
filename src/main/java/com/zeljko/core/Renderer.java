@@ -1,16 +1,28 @@
 package com.zeljko.core;
 
 import com.jogamp.opengl.GL2;
+import com.zeljko.graphics.model.Background;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.utils.BlueprintFactory;
 import com.zeljko.utils.TextureLoader;
 
 import java.util.List;
 
+
 public class Renderer {
 
-    public void renderScene(GL2 gl, Blueprint blueprint, List<Model3D> userModels) {
+    public void renderScene(GL2 gl, GameState gameState) {
+        Blueprint blueprint = gameState.getCurrentBlueprint();
+
+        if (blueprint != null) {
+            String backgroundTexture = BlueprintFactory.getBackgroundForType(blueprint.getBlueprintType());
+            Background.getInstance().draw(gl, backgroundTexture);
+        }
+
         if (blueprint != null) renderBlueprint(gl, blueprint);
+
+        List<Model3D> userModels = gameState.getUserModels();
         if (userModels != null) renderUserModels(gl, userModels);
     }
 

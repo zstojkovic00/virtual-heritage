@@ -96,7 +96,7 @@ public class GameActuator implements GLEventListener {
         camera.applyViewTransform(gl);
 
         if (gameState.getCurrentBlueprint() != null) {
-            renderer.renderScene(gl, gameState.getCurrentBlueprint(), gameState.getUserModels());
+            renderer.renderScene(gl, gameState);
         }
     }
 
@@ -115,8 +115,9 @@ public class GameActuator implements GLEventListener {
     }
 
     @Override
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-        GL2 gl = drawable.getGL().getGL2();
+    public void reshape(GLAutoDrawable glAutoDrawable, int x, int y, int w, int h) {
+        WINDOW_HEIGHT = h;
+        WINDOW_WIDTH = w;
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.zeljko.utils;
 import java.awt.*;
 
 public class Constants {
-    public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 562;
+    public static int WINDOW_WIDTH = 1000;
+    public static int WINDOW_HEIGHT = 562;
 
     private static final double TOLERANCE = 0.1;
     public static final float UNIT_MOVEMENT = 0.1F;

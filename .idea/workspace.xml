@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Add texture mapping based on blueprint type in BlueprintFactory">
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/rock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/wood.png" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Add blueprint tree">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Background.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/tree-background.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resources/textures/green.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/textures/grass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,42 +42,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.OpenGLSquare.executor": "Run",
-    "Application.OpenGLTriangle.executor": "Run",
-    "Application.Project.executor": "Run",
-    "Application.com.zeljko.Main.executor": "Run",
-    "Application.ogl2.exam.Project.executor": "Run",
-    "JUnit.AlignmentCheckerTest.executor": "Run",
-    "JUnit.AlignmentCheckerTest.testAllModelsAligned.executor": "Run",
-    "JUnit.AlignmentCheckerTest.testMisalignedModel.executor": "Run",
-    "JUnit.BlueprintTest.executor": "Run",
-    "JUnit.BlueprintTest.testAllModelsAligned.executor": "Debug",
-    "JUnit.BlueprintTest.testModelFullyAligned.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.LegoBuilder [clean,install].executor": "Run",
-    "Maven.lego-builder [clean,install].executor": "Run",
-    "Maven.virtual-heritage [clean,install].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OpenGLSquare.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OpenGLTriangle.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Project.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.zeljko.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ogl2.exam.Project.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.testAllModelsAligned.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.testMisalignedModel.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BlueprintTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BlueprintTest.testAllModelsAligned.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.BlueprintTest.testModelFullyAligned.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LegoBuilder [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lego-builder [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.virtual-heritage [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.zeljko.lego.graphics" />
@@ -157,6 +158,7 @@
       <workItem from="1723412546345" duration="4845000" />
       <workItem from="1723492394973" duration="842000" />
       <workItem from="1723591351871" duration="3272000" />
+      <workItem from="1724007094888" duration="3346000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
@@ -366,14 +368,21 @@
       <option name="project" value="LOCAL" />
       <updated>1723994519710</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Add blueprint tree">
+      <option name="closed" value="true" />
+      <created>1723995747084</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1723995747084</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initialize OpenGL settings for 3D rendering" />
     <MESSAGE value="Load your own 3d model with custom parser for .obj file" />
     <MESSAGE value="Add camera and shape class" />
     <MESSAGE value="Complete refactoring of code" />
@@ -398,7 +407,8 @@
     <MESSAGE value="+ size" />
     <MESSAGE value="update model constraints on autocomplete finish" />
     <MESSAGE value="Add texture mapping based on blueprint type in BlueprintFactory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add texture mapping based on blueprint type in BlueprintFactory" />
+    <MESSAGE value="Add blueprint tree" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add blueprint tree" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
