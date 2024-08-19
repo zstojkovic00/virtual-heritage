@@ -20,10 +20,15 @@ public class Renderer {
             Background.getInstance().draw(gl, backgroundTexture);
         }
 
-        if (blueprint != null) renderBlueprint(gl, blueprint);
+        if (blueprint != null && !gameState.isAlignmentCheck()) {
+            renderBlueprint(gl, blueprint);
+        }
 
         List<Model3D> userModels = gameState.getUserModels();
-        if (userModels != null) renderUserModels(gl, userModels);
+
+        if (userModels != null) {
+            renderUserModels(gl, userModels);
+        }
     }
 
     private void renderBlueprint(GL2 gl, Blueprint blueprint) {

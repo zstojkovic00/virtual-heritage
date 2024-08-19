@@ -105,7 +105,12 @@ public class GameActuator implements GLEventListener {
     }
 
     public boolean checkAlignment() {
-        return GameAction.checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
+        boolean isAligned = GameAction.checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
+        if (isAligned) {
+            gameState.setAlignmentCheck(true);
+        }
+
+        return isAligned;
     }
 
     public void requestRender() {

@@ -19,6 +19,7 @@ public class GameState {
     private Blueprint currentBlueprint;
     private List<Model3D> userModels;
     private int currentModelIndex;
+    private boolean alignmentCheck;
 
     public void setCurrentBlueprint(BlueprintType type) {
         this.currentBlueprint = BlueprintFactory.createBlueprint(type);
