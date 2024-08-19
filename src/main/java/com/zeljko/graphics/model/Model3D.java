@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class Model3D {
     private boolean isSelected;
     private ShapeType shapeType;
     private String textureName;
+    private List<String> textures;
 
     public void draw(GL2 gl, boolean isOutline) {
         gl.glPushMatrix();
@@ -38,6 +41,7 @@ public class Model3D {
 
         gl.glPopMatrix();
     }
+
 
     private void drawOutline(GL2 gl) {
         if (width <= 0 || height <= 0 || depth <= 0) return;
@@ -61,6 +65,21 @@ public class Model3D {
             Shape.cuboid(gl, width, height, depth, true);
         } else if (shapeType == ShapeType.CYLINDER) {
             Shape.cylinder(gl, width / 2, height, 32, 32, 1, true);
+        }
+    }
+
+    public void setTextures(List<String> textures) {
+        this.textures = textures;
+        if (!textures.isEmpty()) {
+            this.textureName = textures.get(0);
+        }
+    }
+
+    public void getNextTexture() {
+        if (textures != null && !textures.isEmpty()) {
+            int currentIndex = textures.indexOf(textureName);
+            int nextIndex = (currentIndex + 1) % textures.size();
+            textureName = textures.get(nextIndex);
         }
     }
 

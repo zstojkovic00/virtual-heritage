@@ -49,12 +49,12 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
             case KeyEvent.VK_4:
                 currentModel.setHeight(currentModel.getHeight() + UNIT_MOVEMENT);
                 break;
-//            case KeyEvent.VK_5:
-//                currentModel.setDepth(currentModel.getDepth() - UNIT_MOVEMENT);
-//                break;
-//            case KeyEvent.VK_6:
-//                currentModel.setDepth(currentModel.getDepth() + UNIT_MOVEMENT);
-//                break;
+            case KeyEvent.VK_5:
+                currentModel.setDepth(currentModel.getDepth() - UNIT_MOVEMENT);
+                break;
+            case KeyEvent.VK_6:
+                currentModel.setDepth(currentModel.getDepth() + UNIT_MOVEMENT);
+                break;
 
             // Translation
             case KeyEvent.VK_A:

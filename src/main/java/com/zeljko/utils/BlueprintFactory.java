@@ -21,10 +21,17 @@ public class BlueprintFactory {
                 return createCar();
             case TREE:
                 return createTree();
+            case EMPTY:
+                return createEmptyBlueprint();
             default:
                 throw new IllegalArgumentException("Unsupported blueprint type");
         }
     }
+
+    private static Blueprint createEmptyBlueprint() {
+        return new Blueprint(BlueprintType.EMPTY, 99, 99);
+    }
+
 
     public static Blueprint createTree() {
         Blueprint blueprint = new Blueprint(BlueprintType.TREE, 6, 1);
@@ -62,31 +69,43 @@ public class BlueprintFactory {
     }
 
     public static Blueprint createCar() {
-        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 1, 4);
+        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 99, 99);
 
-        Model3D car_body = ModelFactory.createModel(ShapeType.CUBOID);
-        car_body.translate(0, 0, 0);
+        Model3D car_body = new Model3D(4.5, 0.3, 0.3, ShapeType.CUBOID);
+        car_body.translate(0, -1, -1.7);
+        car_body.setRotationX(-90.00);
         blueprint.addModel(car_body);
 
+        Model3D car_body_2 = new Model3D(4.5, 0.3, 0.3, ShapeType.CUBOID);
+        car_body_2.translate(0, -1, 1.2);
+        car_body_2.setRotationX(-90.00);
+        blueprint.addModel(car_body_2);
 
-        Model3D wheel_1 = new Model3D(1.0, 0.5, 1.0, ShapeType.CYLINDER);
-        wheel_1.translate(-2, -1.3, -1.5);
+
+//        Model3D car_body_3 = new Model3D(2.90, 0.40, 2.40, ShapeType.CUBOID);
+//        car_body_3.translate(0.03, -1.12, -0.25);
+//        blueprint.addModel(car_body_3);
+
+
+        Model3D car_body_4 = new Model3D(2.60, 2.50, 0.30, ShapeType.CUBOID);
+        car_body_4.translate(2.7, 0.15, -0.30);
+        car_body_4.rotate(90,90);
+        blueprint.addModel(car_body_4);
+
+        Model3D car_body_5 = new Model3D(5.00, 0.30, 2.50, ShapeType.CUBOID);
+        car_body_5.translate(0, 1.30, -0.3);
+        blueprint.addModel(car_body_5);
+
+
+
+        Model3D wheel_1 = new Model3D(1.0, 2.5, 1.0, ShapeType.CYLINDER);
+        wheel_1.translate(-2, -1.0, -1.5);
         blueprint.addModel(wheel_1);
 
 
-        Model3D wheel_2 = new Model3D(1.0, 0.5, 1.0, ShapeType.CYLINDER);
-        wheel_2.translate(2, -1.3, -1.5);
+        Model3D wheel_2 = new Model3D(1.0, 2.5, 1.0, ShapeType.CYLINDER);
+        wheel_2.translate(2, -1.0, -1.5);
         blueprint.addModel(wheel_2);
-
-
-        Model3D wheel_3 = new Model3D(1.0, 0.5, 1.0, ShapeType.CYLINDER);
-        wheel_3.translate(-2, -1.3, 1);
-        blueprint.addModel(wheel_3);
-
-
-        Model3D wheel_4 = new Model3D(1.0, 0.5, 1.0, ShapeType.CYLINDER);
-        wheel_4.translate(2, -1.3, 1);
-        blueprint.addModel(wheel_4);
 
         return blueprint;
     }
@@ -96,7 +115,7 @@ public class BlueprintFactory {
         Map<String, String> carTextures = new HashMap<>();
         carTextures.put(ShapeType.CUBOID.name(), "wood.png");
         carTextures.put(ShapeType.CYLINDER.name(), "grass.png");
-        carTextures.put("BACKGROUND", "car-background.png");
+        carTextures.put("BACKGROUND", "black-background.png");
         textureMap.put(BlueprintType.CAR, carTextures);
 
 
@@ -105,6 +124,11 @@ public class BlueprintFactory {
         treeTextures.put(ShapeType.CYLINDER.name(), "wood.png");
         treeTextures.put("BACKGROUND", "tree-background.png");
         textureMap.put(BlueprintType.TREE, treeTextures);
+
+
+        Map<String, String> emptyTextures = new HashMap<>();
+        emptyTextures.put("BACKGROUND", "black-background.png");
+        textureMap.put(BlueprintType.EMPTY, emptyTextures);
     }
 
     public static String getTextureForShape(BlueprintType blueprintType, ShapeType shapeType) {

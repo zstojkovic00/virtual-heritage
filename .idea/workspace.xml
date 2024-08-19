@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="add background">
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="remove blueprint when alignment check is true">
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/black-background.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/InputListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Model3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +159,7 @@
       <workItem from="1723412546345" duration="4845000" />
       <workItem from="1723492394973" duration="842000" />
       <workItem from="1723591351871" duration="3272000" />
-      <workItem from="1724007094888" duration="3731000" />
+      <workItem from="1724007094888" duration="7758000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
@@ -379,14 +385,21 @@
       <option name="project" value="LOCAL" />
       <updated>1724034321445</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="remove blueprint when alignment check is true">
+      <option name="closed" value="true" />
+      <created>1724034563556</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1724034563556</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add camera and shape class" />
     <MESSAGE value="Complete refactoring of code" />
     <MESSAGE value="Implement logic to select lego model of choice" />
     <MESSAGE value="Improve naming conventions" />
@@ -411,7 +424,8 @@
     <MESSAGE value="Add texture mapping based on blueprint type in BlueprintFactory" />
     <MESSAGE value="Add blueprint tree" />
     <MESSAGE value="add background" />
-    <option name="LAST_COMMIT_MESSAGE" value="add background" />
+    <MESSAGE value="remove blueprint when alignment check is true" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove blueprint when alignment check is true" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
