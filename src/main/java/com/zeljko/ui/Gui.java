@@ -65,7 +65,7 @@ public class Gui implements GuiNotifier {
         checkAlignmentButton.addActionListener(e -> {
             boolean aligned = gameActuator.checkAlignment();
             JOptionPane.showMessageDialog(frame,
-                    aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned!",
+                    aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned, or textures are incorrect",
                     "Alignment Check",
                     aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
         });

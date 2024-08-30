@@ -2,14 +2,14 @@ package com.zeljko.core;
 
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
+import com.zeljko.graphics.model.Texture;
 import com.zeljko.utils.ShapeType;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static jogamp.opengl.glu.nurbs.Knotvector.TOLERANCE;
 
@@ -24,10 +24,15 @@ public class GameAction {
     public static boolean checkAlignment(Blueprint blueprint, List<Model3D> userModels) {
         if (userModels.size() != blueprint.getBlueprintModels().size()) return false;
 
-        return userModels.stream()
+        boolean modelsAligned = userModels.stream()
                 .allMatch(userModel -> blueprint.getBlueprintModels().stream()
                         .anyMatch(blueprintModel -> isModelAlignedWithBlueprint(userModel, blueprintModel)));
+
+        boolean texturesCorrect = checkTextureAlignment(blueprint, userModels);
+
+        return modelsAligned && texturesCorrect;
     }
+
 
     private static boolean isModelAlignedWithBlueprint(Model3D model, Model3D blueprint) {
         if (model.getShapeType() != blueprint.getShapeType()) return false;
@@ -75,10 +80,24 @@ public class GameAction {
         return size && position;
     }
 
+    private static boolean checkTextureAlignment(Blueprint blueprint, List<Model3D> userModels) {
+        Set<Texture> requiredTextureSet = new HashSet<>(blueprint.getRequiredTextures());
+        Set<Texture> userTextureSet = new HashSet<>(getUserTextures(userModels));
+
+        return requiredTextureSet.equals(userTextureSet);
+    }
+
+    private static List<Texture> getUserTextures(List<Model3D> userModels) {
+        return userModels.stream()
+                .map(model -> new Texture(model.getShapeType(), model.getTextureName(), 1))
+                .distinct()
+                .collect(Collectors.toList());
+    }
 
     public static void startAutocomplete(GameActuator gameActuator, GameState gameState) {
         List<Model3D> userModels = new ArrayList<>(gameState.getUserModels());
         List<Model3D> blueprintModels = gameState.getCurrentBlueprint().getBlueprintModels();
+        List<Texture> requiredTextures = new ArrayList<>(gameState.getCurrentBlueprint().getRequiredTextures());
 
         System.out.println("Starting autocomplete. User models: " + userModels.size() + ", Blueprint models: " + blueprintModels.size());
 
@@ -110,11 +129,30 @@ public class GameAction {
                 continue;
             }
 
+            setTexture(modelToAlign, requiredTextures);
+
             startAutocompleteWithAnimation(modelToAlign, blueprintModel, gameActuator);
 
             if (onAutocompleteFinished != null) {
                 SwingUtilities.invokeLater(onAutocompleteFinished);
             }
+        }
+    }
+
+    private static void setTexture(Model3D model, List<Texture> requiredTextures) {
+        Optional<Texture> matchingTexture = requiredTextures.stream()
+                .filter(texture -> texture.getShapeType() == model.getShapeType() && texture.getCount() > 0)
+                .findFirst();
+
+        if (matchingTexture.isPresent()) {
+            Texture texture = matchingTexture.get();
+            model.setTextureName(texture.getTextureName());
+            texture.setCount(texture.getCount() - 1);
+            if (texture.getCount() == 0) {
+                requiredTextures.remove(texture);
+            }
+        } else {
+            System.out.println("No matching texture found for model of type " + model.getShapeType());
         }
     }
 

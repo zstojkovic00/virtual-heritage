@@ -8,14 +8,31 @@ import com.zeljko.graphics.model.Model3D;
 public class BlueprintFactory {
 
     public static Blueprint createBlueprint(BlueprintType type) {
+        Blueprint blueprint;
         switch (type) {
-            case CAR:
-                return createCar();
             case TREE:
-                return createTree();
+                blueprint = createTree();
+                setTreeTextures(blueprint);
+                break;
+            case CAR:
+                blueprint = createCar();
+                setCarTextures(blueprint);
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported blueprint type");
         }
+        return blueprint;
+    }
+
+    private static void setTreeTextures(Blueprint blueprint) {
+        blueprint.addRequiredTexture(ShapeType.CYLINDER, "wood.png", 1);
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "grass.png", 6);
+    }
+
+    private static void setCarTextures(Blueprint blueprint) {
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "wood.png", 2);
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "rock.png", 2);
+        blueprint.addRequiredTexture(ShapeType.CYLINDER, "grass.png", 2);
     }
 
     public static Blueprint createTree() {
@@ -54,7 +71,7 @@ public class BlueprintFactory {
     }
 
     public static Blueprint createCar() {
-        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 99, 99);
+        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 4, 2);
 
         Model3D car_body = new Model3D(4.5, 0.3, 0.3, ShapeType.CUBOID);
         car_body.translate(0, -1, -1.7);
@@ -74,13 +91,12 @@ public class BlueprintFactory {
 
         Model3D car_body_4 = new Model3D(2.60, 2.50, 0.30, ShapeType.CUBOID);
         car_body_4.translate(2.7, 0.15, -0.30);
-        car_body_4.rotate(90,90);
+        car_body_4.rotate(90, 90);
         blueprint.addModel(car_body_4);
 
         Model3D car_body_5 = new Model3D(5.00, 0.30, 2.50, ShapeType.CUBOID);
         car_body_5.translate(0, 1.30, -0.3);
         blueprint.addModel(car_body_5);
-
 
 
         Model3D wheel_1 = new Model3D(1.0, 2.5, 1.0, ShapeType.CYLINDER);
