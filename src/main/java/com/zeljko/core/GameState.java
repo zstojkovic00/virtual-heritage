@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -20,12 +22,11 @@ public class GameState {
     private List<Model3D> userModels;
     private int currentModelIndex;
     private boolean alignmentCheck;
-
-    public void setCurrentBlueprint(BlueprintType type) {
-        this.currentBlueprint = BlueprintFactory.createBlueprint(type);
-    }
+    private List<BlueprintType> remainingBlueprints;
+    private Random random = new Random();
 
     public GameState() {
+        remainingBlueprints = new ArrayList<>(Arrays.asList(BlueprintType.values()));
         this.userModels = new ArrayList<>();
     }
 
@@ -92,5 +93,17 @@ public class GameState {
 
     public Model3D getCurrentModel() {
         return currentModelIndex != -1 ? userModels.get(currentModelIndex) : null;
+    }
+
+    public void setRandomBlueprint() {
+        if (!remainingBlueprints.isEmpty()) {
+            int i = random.nextInt(remainingBlueprints.size());
+            BlueprintType type = remainingBlueprints.remove(i);
+            setCurrentBlueprint(type);
+        }
+    }
+
+    public void setCurrentBlueprint(BlueprintType type) {
+        this.currentBlueprint = BlueprintFactory.createBlueprint(type);
     }
 }

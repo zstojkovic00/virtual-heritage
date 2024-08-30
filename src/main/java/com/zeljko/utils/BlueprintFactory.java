@@ -21,28 +21,28 @@ public class BlueprintFactory {
                 return createCar();
             case TREE:
                 return createTree();
-            case EMPTY:
-                return createEmptyBlueprint();
+//            case EMPTY:
+//                return createEmptyBlueprint();
             default:
                 throw new IllegalArgumentException("Unsupported blueprint type");
         }
     }
 
-    private static Blueprint createEmptyBlueprint() {
-        return new Blueprint(BlueprintType.EMPTY, 99, 99);
-    }
+//    private static Blueprint createEmptyBlueprint() {
+//        return new Blueprint(BlueprintType.EMPTY, 99, 99);
+//    }
 
 
     public static Blueprint createTree() {
         Blueprint blueprint = new Blueprint(BlueprintType.TREE, 6, 1);
 
         Model3D trunk = new Model3D(0.5, 2.0, 0.5, ShapeType.CYLINDER);
-        trunk.translate(0, 0, 0);
+        trunk.translate(0, 0.05, 0);
         trunk.rotate(90, 0);
         blueprint.addModel(trunk);
 
         Model3D treeTop1 = new Model3D(2, 0.5, 0.5, ShapeType.CUBOID);
-        treeTop1.translate(0, 0.25, 0);
+        treeTop1.translate(0, 0.3, 0);
         blueprint.addModel(treeTop1);
 
         Model3D treeTop2 = new Model3D(2, 0.5, 0.5, ShapeType.CUBOID);
@@ -126,9 +126,9 @@ public class BlueprintFactory {
         textureMap.put(BlueprintType.TREE, treeTextures);
 
 
-        Map<String, String> emptyTextures = new HashMap<>();
-        emptyTextures.put("BACKGROUND", "black-background.png");
-        textureMap.put(BlueprintType.EMPTY, emptyTextures);
+//        Map<String, String> emptyTextures = new HashMap<>();
+//        emptyTextures.put("BACKGROUND", "black-background.png");
+//        textureMap.put(BlueprintType.EMPTY, emptyTextures);
     }
 
     public static String getTextureForShape(BlueprintType blueprintType, ShapeType shapeType) {

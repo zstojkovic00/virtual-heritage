@@ -40,7 +40,7 @@ public class GameActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.gameState = new GameState();
-        this.gameState.setCurrentBlueprint(BlueprintType.CAR);
+        this.gameState.setRandomBlueprint();
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(gameState, camera);
         this.light = new Light();
@@ -108,9 +108,27 @@ public class GameActuator implements GLEventListener {
         boolean isAligned = GameAction.checkAlignment(gameState.getCurrentBlueprint(), gameState.getUserModels());
         if (isAligned) {
             gameState.setAlignmentCheck(true);
+            gui.showNextLevelButton();
         }
 
         return isAligned;
+    }
+
+    public void nextLevel() {
+        if (!gameState.getRemainingBlueprints().isEmpty()) {
+            gameState.setRandomBlueprint();
+
+            // rest game state
+            gameState.getUserModels().clear();
+            gameState.setCurrentModelIndex(-1);
+            gameState.setAlignmentCheck(false);
+
+            // update gui
+            gui.updateModelCount();
+            gui.hideNextLevelButton();
+        } else {
+            gui.showAllLevelCompleteMessage();
+        }
     }
 
     public void requestRender() {

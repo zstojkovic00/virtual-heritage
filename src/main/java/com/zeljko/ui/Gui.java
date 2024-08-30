@@ -25,6 +25,7 @@ public class Gui implements GuiNotifier {
     private JMenuBar menuBar;
     private GameActuator gameActuator;
     private JToolBar toolBar;
+    private JButton nextLevelButton;
     private Map<String, JLabel> modelCount = new HashMap<>();
 
     public Gui(JFrame frame, InputListener inputListener, GameActuator gameActuator) {
@@ -68,6 +69,11 @@ public class Gui implements GuiNotifier {
                     "Alignment Check",
                     aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
         });
+
+        nextLevelButton = new JButton("Next Level");
+        nextLevelButton.addActionListener(e -> gameActuator.nextLevel());
+        nextLevelButton.setVisible(false);
+        toolBar.add(nextLevelButton);
 
 
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
@@ -150,4 +156,16 @@ public class Gui implements GuiNotifier {
         return path + type.name().toLowerCase() + ".png";
     }
 
+    public void showNextLevelButton() {
+        nextLevelButton.setVisible(true);
+    }
+
+    public void hideNextLevelButton() {
+        nextLevelButton.setVisible(false);
+    }
+
+    public void showAllLevelCompleteMessage() {
+        JOptionPane.showMessageDialog(null, "Unfortunately, we don't have any more levels. You've completed them all!",
+                "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
