@@ -1,6 +1,7 @@
 package com.zeljko.graphics.model;
 
 import com.jogamp.opengl.GL2;
+import com.zeljko.utils.BlueprintType;
 import com.zeljko.utils.TextureLoader;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,15 @@ public class Background {
             instance = new Background();
         }
         return instance;
+    }
+
+    public static String getBackgroundForType(BlueprintType type) {
+        switch (type) {
+            case TREE:
+                return "tree-background.png";
+            default:
+                return "default-background.png";
+        }
     }
 
     public void draw(GL2 gl, String textureName) {

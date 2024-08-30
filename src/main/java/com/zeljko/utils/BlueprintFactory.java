@@ -4,16 +4,8 @@ package com.zeljko.utils;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class BlueprintFactory {
-
-    private static final Map<BlueprintType, Map<String, String>> textureMap = new HashMap<>();
-
-    static {
-        initializeTextures();
-    }
 
     public static Blueprint createBlueprint(BlueprintType type) {
         switch (type) {
@@ -21,17 +13,10 @@ public class BlueprintFactory {
                 return createCar();
             case TREE:
                 return createTree();
-//            case EMPTY:
-//                return createEmptyBlueprint();
             default:
                 throw new IllegalArgumentException("Unsupported blueprint type");
         }
     }
-
-//    private static Blueprint createEmptyBlueprint() {
-//        return new Blueprint(BlueprintType.EMPTY, 99, 99);
-//    }
-
 
     public static Blueprint createTree() {
         Blueprint blueprint = new Blueprint(BlueprintType.TREE, 6, 1);
@@ -109,42 +94,4 @@ public class BlueprintFactory {
 
         return blueprint;
     }
-
-
-    private static void initializeTextures() {
-        Map<String, String> carTextures = new HashMap<>();
-        carTextures.put(ShapeType.CUBOID.name(), "wood.png");
-        carTextures.put(ShapeType.CYLINDER.name(), "grass.png");
-        carTextures.put("BACKGROUND", "black-background.png");
-        textureMap.put(BlueprintType.CAR, carTextures);
-
-
-        Map<String, String> treeTextures = new HashMap<>();
-        treeTextures.put(ShapeType.CUBOID.name(), "grass.png");
-        treeTextures.put(ShapeType.CYLINDER.name(), "wood.png");
-        treeTextures.put("BACKGROUND", "tree-background.png");
-        textureMap.put(BlueprintType.TREE, treeTextures);
-
-
-//        Map<String, String> emptyTextures = new HashMap<>();
-//        emptyTextures.put("BACKGROUND", "black-background.png");
-//        textureMap.put(BlueprintType.EMPTY, emptyTextures);
-    }
-
-    public static String getTextureForShape(BlueprintType blueprintType, ShapeType shapeType) {
-        Map<String, String> textures = textureMap.get(blueprintType);
-        if (textures != null) {
-            return textures.get(shapeType.name());
-        }
-        return null;
-    }
-
-    public static String getBackgroundForType(BlueprintType blueprintType) {
-        Map<String, String> textures = textureMap.get(blueprintType);
-        if (textures != null) {
-            return textures.get("BACKGROUND");
-        }
-        return null;
-    }
-
 }

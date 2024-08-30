@@ -1,6 +1,8 @@
 package com.zeljko.utils;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Constants {
     public static int WINDOW_WIDTH = 1000;
@@ -17,4 +19,7 @@ public class Constants {
     public static final Color GRAY = new Color(200, 200, 200);
     public static final String IMAGE_PATH = "src/main/java/resources/images/";
     public static final String TEXTURE_PATH = "src/main/java/resources/textures/";
+
+    public static final List<String> TEXTURES = Arrays.asList("wood.png", "grass.png", "rock.png");
+
 }

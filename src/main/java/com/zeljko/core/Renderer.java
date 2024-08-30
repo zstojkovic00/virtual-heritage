@@ -4,7 +4,6 @@ import com.jogamp.opengl.GL2;
 import com.zeljko.graphics.model.Background;
 import com.zeljko.graphics.model.Blueprint;
 import com.zeljko.graphics.model.Model3D;
-import com.zeljko.utils.BlueprintFactory;
 import com.zeljko.utils.TextureLoader;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class Renderer {
         Blueprint blueprint = gameState.getCurrentBlueprint();
 
         if (blueprint != null) {
-            String backgroundTexture = BlueprintFactory.getBackgroundForType(blueprint.getBlueprintType());
+            String backgroundTexture = Background.getBackgroundForType(blueprint.getBlueprintType());
             Background.getInstance().draw(gl, backgroundTexture);
         }
 

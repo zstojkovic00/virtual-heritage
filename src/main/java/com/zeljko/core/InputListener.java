@@ -103,6 +103,10 @@ public class InputListener implements KeyListener, ActionListener, MouseListener
                 gameState.selectNextModel();
                 break;
 
+            case KeyEvent.VK_T:
+                currentModel.nextTexture();
+                break;
+
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
         }

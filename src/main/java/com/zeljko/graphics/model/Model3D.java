@@ -10,6 +10,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static com.zeljko.utils.Constants.TEXTURES;
+
 
 @Getter
 @Setter
@@ -25,6 +27,7 @@ public class Model3D {
     private ShapeType shapeType;
     private String textureName;
     private List<String> textures;
+    private int currentTextureIndex;
 
     public void draw(GL2 gl, boolean isOutline) {
         gl.glPushMatrix();
@@ -70,16 +73,16 @@ public class Model3D {
 
     public void setTextures(List<String> textures) {
         this.textures = textures;
+        this.currentTextureIndex = 0;
         if (!textures.isEmpty()) {
             this.textureName = textures.get(0);
         }
     }
 
-    public void getNextTexture() {
+    public void nextTexture() {
         if (textures != null && !textures.isEmpty()) {
-            int currentIndex = textures.indexOf(textureName);
-            int nextIndex = (currentIndex + 1) % textures.size();
-            textureName = textures.get(nextIndex);
+            currentTextureIndex = (currentTextureIndex + 1) % textures.size();
+            textureName = textures.get(currentTextureIndex);
         }
     }
 
@@ -94,7 +97,9 @@ public class Model3D {
         this.rotationY = 0;
         this.scale = 1.0f;
         this.shapeType = shapeType;
-        this.textureName = null;
+        this.textures = TEXTURES;
+        this.currentTextureIndex = 0;
+        this.textureName = textures.get(currentTextureIndex);
     }
 
     public void translate(double x, double y, double z) {

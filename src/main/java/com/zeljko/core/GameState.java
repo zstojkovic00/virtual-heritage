@@ -34,10 +34,6 @@ public class GameState {
         if (canAddModel(shapeType)) {
             Model3D newModel = ModelFactory.createModel(shapeType);
 
-            if (currentBlueprint != null) {
-                String texture = BlueprintFactory.getTextureForShape(currentBlueprint.getBlueprintType(), shapeType);
-                newModel.setTextureName(texture);
-            }
 
             newModel.translate(Math.random() * 10 - 5,
                     Math.random() * 10 - 5,
