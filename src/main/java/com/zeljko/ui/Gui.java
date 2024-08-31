@@ -3,6 +3,7 @@ package com.zeljko.ui;
 
 import com.zeljko.core.GameActuator;
 import com.zeljko.core.InputListener;
+import com.zeljko.utils.BlueprintType;
 import com.zeljko.utils.ShapeType;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,11 @@ public class Gui implements GuiNotifier {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
-    private GameActuator gameActuator;
     private JToolBar toolBar;
     private JButton nextLevelButton;
+    private JLabel blueprintImage;
+    private JDialog blueprintImageDialog;
+    private GameActuator gameActuator;
     private Map<String, JLabel> modelCount = new HashMap<>();
 
     public Gui(JFrame frame, InputListener inputListener, GameActuator gameActuator) {
@@ -70,11 +73,17 @@ public class Gui implements GuiNotifier {
                     aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
         });
 
+
+        JButton showBlueprintButton = new JButton("Show Blueprint");
+        blueprintImage = new JLabel();
+        showBlueprintButton.addActionListener(e -> showFullSizeImage());
+        toolBar.add(showBlueprintButton);
+
+
         nextLevelButton = new JButton("Next Level");
         nextLevelButton.addActionListener(e -> gameActuator.nextLevel());
         nextLevelButton.setVisible(false);
         toolBar.add(nextLevelButton);
-
 
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -144,6 +153,39 @@ public class Gui implements GuiNotifier {
             modelCount.get(type.name()).setText(Long.toString(count));
         }
     }
+    private void showFullSizeImage() {
+        JLabel imageLabel = new JLabel();
+        if (blueprintImageDialog == null) {
+            blueprintImageDialog = new JDialog(frame, "Blueprint Example", true);
+            blueprintImageDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            imageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+            JScrollPane scrollPane = new JScrollPane(imageLabel);
+            blueprintImageDialog.add(scrollPane);
+
+            blueprintImageDialog.setSize(450, 450);
+            blueprintImageDialog.setLocationRelativeTo(frame);
+        }
+
+        ImageIcon icon = (ImageIcon) blueprintImage.getIcon();
+        if (icon != null) {
+            imageLabel.setIcon(icon);
+        }
+
+        blueprintImageDialog.setVisible(true);
+    }
+
+    public void setBlueprintImage(BlueprintType type) {
+        String imagePath = createImagePath(IMAGE_PATH, type);
+        ImageIcon icon = new ImageIcon(imagePath);
+        if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+            Image image = icon.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+            blueprintImage.setIcon(new ImageIcon(image));
+        } else {
+            System.out.println("Failed to load image: " + imagePath);
+        }
+    }
 
     private ImageIcon resizeImage(String path, int width, int height) {
         ImageIcon originalIcon = new ImageIcon(path);
@@ -153,6 +195,10 @@ public class Gui implements GuiNotifier {
     }
 
     public String createImagePath(String path, ShapeType type) {
+        return path + type.name().toLowerCase() + ".png";
+    }
+
+    public String createImagePath(String path, BlueprintType type) {
         return path + type.name().toLowerCase() + ".png";
     }
 

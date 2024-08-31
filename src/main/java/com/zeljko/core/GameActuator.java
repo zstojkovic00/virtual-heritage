@@ -40,8 +40,7 @@ public class GameActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.gameState = new GameState();
-//        this.gameState.setRandomBlueprint();
-        this.gameState.setCurrentBlueprint(BlueprintType.TABLE);
+        this.gameState.setRandomBlueprint();
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(gameState, camera);
         this.light = new Light();
@@ -59,6 +58,7 @@ public class GameActuator implements GLEventListener {
 
             animator = new FPSAnimator(canvas, 60);
             gui = new Gui(frame, inputListener, this);
+            gui.setBlueprintImage(gameState.getCurrentBlueprint().getBlueprintType());
             GameAction.updateModelConstraints(gui::updateModelCount);
             frame.getContentPane().add(canvas, BorderLayout.CENTER);
             frame.setJMenuBar(gui.getMenuBar());
@@ -127,6 +127,7 @@ public class GameActuator implements GLEventListener {
             // update gui
             gui.updateModelCount();
             gui.hideNextLevelButton();
+            gui.setBlueprintImage(gameState.getCurrentBlueprint().getBlueprintType());
         } else {
             gui.showAllLevelCompleteMessage();
         }

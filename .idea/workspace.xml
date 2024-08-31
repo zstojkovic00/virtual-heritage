@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="Add texture alignment">
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/car-background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/rubber.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/table-background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/textures/wood-2.png" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="add new blueprint">
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/table.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/tree.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Background.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/BlueprintType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/utils/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +62,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/textures",
+    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,8 +80,8 @@
       <recent name="com.zeljko.lego.graphics" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/resources/textures" />
       <recent name="$PROJECT_DIR$/src/main/java/resources/images" />
+      <recent name="$PROJECT_DIR$/src/main/java/resources/textures" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/textures" />
     </key>
@@ -161,7 +156,9 @@
       <workItem from="1723492394973" duration="842000" />
       <workItem from="1723591351871" duration="3272000" />
       <workItem from="1724007094888" duration="9640000" />
-      <workItem from="1725047910345" duration="10330000" />
+      <workItem from="1725047910345" duration="10804000" />
+      <workItem from="1725062924765" duration="6000" />
+      <workItem from="1725104410669" duration="3565000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
@@ -427,14 +424,21 @@
       <option name="project" value="LOCAL" />
       <updated>1725057667933</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add new blueprint">
+      <option name="closed" value="true" />
+      <created>1725062624079</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1725062624079</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement alignment check for multiple models" />
     <MESSAGE value="Fix blueprint isModelAlignedWithBlueprint method" />
     <MESSAGE value="." />
     <MESSAGE value="Implement camera movement around blueprint" />
@@ -459,7 +463,8 @@
     <MESSAGE value="Init random blueprint at start + next level button" />
     <MESSAGE value="Texture rotation on T" />
     <MESSAGE value="Add texture alignment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add texture alignment" />
+    <MESSAGE value="add new blueprint" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new blueprint" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
