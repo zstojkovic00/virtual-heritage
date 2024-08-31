@@ -27,6 +27,10 @@ public class Background {
         switch (type) {
             case TREE:
                 return "tree-background.png";
+            case CAR:
+                return "car-background.png";
+            case TABLE:
+                return "table-background.png";
             default:
                 return "default-background.png";
         }
@@ -43,37 +47,37 @@ public class Background {
 
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glPushMatrix();
-            gl.glLoadIdentity();
-            gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
 
         gl.glPushMatrix();
-            gl.glLoadIdentity();
+        gl.glLoadIdentity();
 
-            gl.glDisable(GL2.GL_DEPTH_TEST);
+        gl.glDisable(GL2.GL_DEPTH_TEST);
 
-            gl.glEnable(GL2.GL_TEXTURE_2D);
-            TextureLoader.bindTexture(gl, textureName);
+        gl.glEnable(GL2.GL_TEXTURE_2D);
+        TextureLoader.bindTexture(gl, textureName);
 
-            gl.glColor3f(1f, 1f, 1f);
+        gl.glColor3f(1f, 1f, 1f);
 
-            gl.glBegin(GL2.GL_QUADS);
-            gl.glTexCoord2f(0, 0);
-            gl.glVertex2f(-1, -1);
-            gl.glTexCoord2f(1, 0);
-            gl.glVertex2f(1, -1);
-            gl.glTexCoord2f(1, 1);
-            gl.glVertex2f(1, 1);
-            gl.glTexCoord2f(0, 1);
-            gl.glVertex2f(-1, 1);
+        gl.glBegin(GL2.GL_QUADS);
+        gl.glTexCoord2f(0, 0);
+        gl.glVertex2f(-1, -1);
+        gl.glTexCoord2f(1, 0);
+        gl.glVertex2f(1, -1);
+        gl.glTexCoord2f(1, 1);
+        gl.glVertex2f(1, 1);
+        gl.glTexCoord2f(0, 1);
+        gl.glVertex2f(-1, 1);
         gl.glEnd();
 
-            gl.glDisable(GL2.GL_TEXTURE_2D);
+        gl.glDisable(GL2.GL_TEXTURE_2D);
 
-            gl.glEnable(GL2.GL_DEPTH_TEST);
+        gl.glEnable(GL2.GL_DEPTH_TEST);
 
-            gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glPopMatrix();
-            gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glPopMatrix();
     }
 }

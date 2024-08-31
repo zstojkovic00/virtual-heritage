@@ -40,7 +40,8 @@ public class GameActuator implements GLEventListener {
         caps.setStencilBits(8);
 
         this.gameState = new GameState();
-        this.gameState.setRandomBlueprint();
+//        this.gameState.setRandomBlueprint();
+        this.gameState.setCurrentBlueprint(BlueprintType.TABLE);
         this.camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.inputListener = new InputListener(gameState, camera);
         this.light = new Light();

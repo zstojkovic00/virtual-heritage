@@ -20,6 +20,6 @@ public class Constants {
     public static final String IMAGE_PATH = "src/main/java/resources/images/";
     public static final String TEXTURE_PATH = "src/main/java/resources/textures/";
 
-    public static final List<String> TEXTURES = Arrays.asList("wood.png", "grass.png", "rock.png");
+    public static final List<String> TEXTURES = Arrays.asList("wood.png", "grass.png", "rock.png", "rubber.png", "wood-2.png");
 
 }

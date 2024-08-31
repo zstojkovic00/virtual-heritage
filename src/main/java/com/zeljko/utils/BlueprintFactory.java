@@ -18,6 +18,10 @@ public class BlueprintFactory {
                 blueprint = createCar();
                 setCarTextures(blueprint);
                 break;
+            case TABLE:
+                blueprint = createTable();
+                setTableTextures(blueprint);
+                break;
             default:
                 throw new IllegalArgumentException("Unsupported blueprint type");
         }
@@ -29,10 +33,13 @@ public class BlueprintFactory {
         blueprint.addRequiredTexture(ShapeType.CUBOID, "grass.png", 6);
     }
 
+    private static void setTableTextures(Blueprint blueprint) {
+        blueprint.addRequiredTexture(ShapeType.CYLINDER, "wood-2.png", 4);
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "wood-2.png", 1);
+    }
     private static void setCarTextures(Blueprint blueprint) {
-        blueprint.addRequiredTexture(ShapeType.CUBOID, "wood.png", 2);
-        blueprint.addRequiredTexture(ShapeType.CUBOID, "rock.png", 2);
-        blueprint.addRequiredTexture(ShapeType.CYLINDER, "grass.png", 2);
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "wood-2.png", 4);
+        blueprint.addRequiredTexture(ShapeType.CYLINDER, "rubber.png", 2);
     }
 
     public static Blueprint createTree() {
@@ -66,6 +73,37 @@ public class BlueprintFactory {
         Model3D treeTop6 = new Model3D(2, 0.5, 0.5, ShapeType.CUBOID);
         treeTop6.translate(-2, 1.3, 0);
         blueprint.addModel(treeTop6);
+
+        return blueprint;
+    }
+
+    public static Blueprint createTable() {
+        Blueprint blueprint = new Blueprint(BlueprintType.TABLE, 1, 4);
+
+        Model3D table = new Model3D(5, 0.5, 5, ShapeType.CUBOID);
+        table.translate(0, 0, 0);
+        blueprint.addModel(table);
+
+        Model3D table_leg_1 = new Model3D(0.5, 2.5, 1.0, ShapeType.CYLINDER);
+        table_leg_1.translate(-2.0, -0.1, -2);
+        table_leg_1.rotate(90, 0);
+        blueprint.addModel(table_leg_1);
+
+        Model3D table_leg_2 = new Model3D(0.5, 2.5, 1.0, ShapeType.CYLINDER);
+        table_leg_2.translate(2.0, -0.1, -2);
+        table_leg_2.rotate(90, 0);
+        blueprint.addModel(table_leg_2);
+
+
+        Model3D table_leg_3 = new Model3D(0.5, 2.5, 1.0, ShapeType.CYLINDER);
+        table_leg_3.translate(2.0, -0.1, 2);
+        table_leg_3.rotate(90, 0);
+        blueprint.addModel(table_leg_3);
+
+        Model3D table_leg_4 = new Model3D(0.5, 2.5, 1.0, ShapeType.CYLINDER);
+        table_leg_4.translate(-2.0, -0.1, 2);
+        table_leg_4.rotate(90, 0);
+        blueprint.addModel(table_leg_4);
 
         return blueprint;
     }
