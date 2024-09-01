@@ -27,8 +27,8 @@ public class Background {
         switch (type) {
             case TREE:
                 return "tree-background.png";
-            case CAR:
-                return "car-background.png";
+            case SATELLITE:
+                return "satellite-background.png";
             case TABLE:
                 return "table-background.png";
             default:

@@ -14,9 +14,9 @@ public class BlueprintFactory {
                 blueprint = createTree();
                 setTreeTextures(blueprint);
                 break;
-            case CAR:
-                blueprint = createCar();
-                setCarTextures(blueprint);
+            case SATELLITE:
+                blueprint = createSatellite();
+                setSatelliteTextures(blueprint);
                 break;
             case TABLE:
                 blueprint = createTable();
@@ -37,9 +37,10 @@ public class BlueprintFactory {
         blueprint.addRequiredTexture(ShapeType.CYLINDER, "wood-2.png", 4);
         blueprint.addRequiredTexture(ShapeType.CUBOID, "wood-2.png", 1);
     }
-    private static void setCarTextures(Blueprint blueprint) {
-        blueprint.addRequiredTexture(ShapeType.CUBOID, "wood-2.png", 4);
-        blueprint.addRequiredTexture(ShapeType.CYLINDER, "rubber.png", 2);
+
+    private static void setSatelliteTextures(Blueprint blueprint) {
+        blueprint.addRequiredTexture(ShapeType.CUBOID, "metal-blue.png", 2);
+        blueprint.addRequiredTexture(ShapeType.CYLINDER, "metal-black.png", 5);
     }
 
     public static Blueprint createTree() {
@@ -108,44 +109,49 @@ public class BlueprintFactory {
         return blueprint;
     }
 
-    public static Blueprint createCar() {
-        Blueprint blueprint = new Blueprint(BlueprintType.CAR, 4, 2);
+    private static Blueprint createSatellite() {
 
-        Model3D car_body = new Model3D(4.5, 0.3, 0.3, ShapeType.CUBOID);
-        car_body.translate(0, -1, -1.7);
-        car_body.setRotationX(-90.00);
-        blueprint.addModel(car_body);
+        Blueprint blueprint = new Blueprint(BlueprintType.SATELLITE, 2, 5);
 
-        Model3D car_body_2 = new Model3D(4.5, 0.3, 0.3, ShapeType.CUBOID);
-        car_body_2.translate(0, -1, 1.2);
-        car_body_2.setRotationX(-90.00);
-        blueprint.addModel(car_body_2);
+        Model3D satellite_body = new Model3D(1.5, 2.5, 1.0, ShapeType.CYLINDER);
+        satellite_body.translate(0, 0, 0);
+        satellite_body.rotate(90, 0);
+        blueprint.addModel(satellite_body);
 
+        Model3D satellite_element_up = new Model3D(0.5, 0.5, 1.0, ShapeType.CYLINDER);
+        satellite_element_up.translate(0, 0.5, 0);
+        satellite_element_up.rotate(90, 0);
+        blueprint.addModel(satellite_element_up);
 
-//        Model3D car_body_3 = new Model3D(2.90, 0.40, 2.40, ShapeType.CUBOID);
-//        car_body_3.translate(0.03, -1.12, -0.25);
-//        blueprint.addModel(car_body_3);
+        Model3D satellite_element_up_2 = new Model3D(3.5, 0.5, 0.1, ShapeType.CUBOID);
+        satellite_element_up_2.translate(3, 0.5, 0);
+        satellite_element_up_2.rotate(90, 0);
+        blueprint.addModel(satellite_element_up_2);
 
-
-        Model3D car_body_4 = new Model3D(2.60, 2.50, 0.30, ShapeType.CUBOID);
-        car_body_4.translate(2.7, 0.15, -0.30);
-        car_body_4.rotate(90, 90);
-        blueprint.addModel(car_body_4);
-
-        Model3D car_body_5 = new Model3D(5.00, 0.30, 2.50, ShapeType.CUBOID);
-        car_body_5.translate(0, 1.30, -0.3);
-        blueprint.addModel(car_body_5);
+        Model3D satellite_element_up_3 = new Model3D(3.5, 0.5, 0.1, ShapeType.CUBOID);
+        satellite_element_up_3.translate(-3, 0.5, 0);
+        satellite_element_up_3.rotate(90, 0);
+        blueprint.addModel(satellite_element_up_3);
 
 
-        Model3D wheel_1 = new Model3D(1.0, 2.5, 1.0, ShapeType.CYLINDER);
-        wheel_1.translate(-2, -1.0, -1.5);
-        blueprint.addModel(wheel_1);
+        Model3D satellite_element_up_4 = new Model3D(0.1, 1, 0.1, ShapeType.CYLINDER);
+        satellite_element_up_4.translate(-1.2, 0.5, 0);
+        satellite_element_up_4.rotate(0, 90);
+        blueprint.addModel(satellite_element_up_4);
+
+        Model3D satellite_element_up_5 = new Model3D(0.1, 1, 0.1, ShapeType.CYLINDER);
+        satellite_element_up_5.translate(0.2, 0.5, 0);
+        satellite_element_up_5.rotate(0, 90);
+        blueprint.addModel(satellite_element_up_5);
 
 
-        Model3D wheel_2 = new Model3D(1.0, 2.5, 1.0, ShapeType.CYLINDER);
-        wheel_2.translate(2, -1.0, -1.5);
-        blueprint.addModel(wheel_2);
+        Model3D satellite_element_down = new Model3D(0.5, 0.5, 1.0, ShapeType.CYLINDER);
+        satellite_element_down.translate(0, -2.5, 0);
+        satellite_element_down.rotate(90, 0);
+        blueprint.addModel(satellite_element_down);
+
 
         return blueprint;
     }
+
 }

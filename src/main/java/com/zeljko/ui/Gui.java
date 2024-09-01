@@ -123,7 +123,7 @@ public class Gui implements GuiNotifier {
                 150, 150), inputListener, ShapeType.CUBOID.name());
 
         JPanel cylinder = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CYLINDER),
-                225, 135), inputListener, ShapeType.CYLINDER.name());
+                150, 135), inputListener, ShapeType.CYLINDER.name());
 
         panel.add(cuboid);
         panel.add(cylinder);

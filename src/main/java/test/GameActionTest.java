@@ -20,7 +20,7 @@ class GameActionTest {
 
     @BeforeEach
     void setUp() {
-        blueprint = new Blueprint(BlueprintType.CAR, 2, 1);
+        blueprint = new Blueprint(BlueprintType.TABLE, 2, 1);
         userModels = new ArrayList<>();
 
         Model3D CUBOID_1 = new Model3D(1.0, 1.0, 1.0, ShapeType.CUBOID);
