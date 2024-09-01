@@ -60,10 +60,64 @@ public class Gui implements GuiNotifier {
         JMenuItem newGame = new JMenuItem("New Game");
         JMenuItem exitGame = new JMenuItem("Exit");
 
+        JMenu helpMenu = new JMenu("Help");
+        JMenuItem instructions = new JMenuItem("Instructions");
+        helpMenu.add(instructions);
 
         fileMenu.add(newGame);
         fileMenu.add(exitGame);
+        
         menuBar.add(fileMenu);
+        menuBar.add(helpMenu);
+
+
+        newGame.addActionListener(e -> {
+            gameActuator.newGame();
+        });
+
+        exitGame.addActionListener(e -> System.exit(0));
+
+        instructions.addActionListener(e -> showInstructions());
+    }
+
+    private void showInstructions() {
+        String instructionsText = "Instructions:\n\n" +
+                "Dimensions:\n" +
+                "1 - Decrease width\n" +
+                "2 - Increase width\n" +
+                "3 - Decrease height\n" +
+                "4 - Increase height\n" +
+                "5 - Decrease depth\n" +
+                "6 - Increase depth\n\n" +
+                "Translation:\n" +
+                "A - Move left\n" +
+                "D - Move right\n" +
+                "W - Move up\n" +
+                "S - Move down\n" +
+                "Q - Move forward\n" +
+                "E - Move backward\n\n" +
+                "Rotation:\n" +
+                "Left Arrow - Rotate left\n" +
+                "Right Arrow - Rotate right\n" +
+                "Up Arrow - Rotate up\n" +
+                "Down Arrow - Rotate down\n\n" +
+                "Scale:\n" +
+                "Z - Increase scale\n" +
+                "X - Decrease scale\n\n" +
+                "Other Controls:\n" +
+                "O - Select next model\n" +
+                "T - Change texture\n" +
+                "Esc - Exit game\n\n" +
+                "Lighting:\n" +
+                "You can enable/disable different light models using the checkboxes\n" +
+                "(global ambient light, ambient, diffuse, and specular).\n\n" +
+                "Game Controls:\n" +
+                "Check Alignment - Check if models are correctly aligned\n" +
+                "Autocomplete - Automatically complete the current level\n" +
+                "Show Blueprint - Display the full-size blueprint image\n" +
+                "Next Level - Proceed to the next level (when available)";
+
+        JOptionPane.showMessageDialog(frame, instructionsText, "Instructions", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void initToolBar() {

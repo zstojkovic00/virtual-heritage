@@ -7,7 +7,6 @@ import com.jogamp.opengl.util.FPSAnimator;
 import com.zeljko.graphics.Camera;
 import com.zeljko.graphics.Light;
 import com.zeljko.ui.Gui;
-import com.zeljko.utils.BlueprintType;
 import com.zeljko.utils.TextureLoader;
 import lombok.Getter;
 
@@ -22,7 +21,7 @@ import static com.zeljko.utils.Constants.WINDOW_WIDTH;
 public class GameActuator implements GLEventListener {
 
     @Getter
-    private final GameState gameState;
+    private GameState gameState;
     private final InputListener inputListener;
     private final Camera camera;
     private Gui gui;
@@ -133,6 +132,15 @@ public class GameActuator implements GLEventListener {
         }
 
         return isAligned;
+    }
+
+    public void newGame() {
+        gameState = new GameState();
+        gameState.setRandomBlueprint();
+        gui.updateModelCount();
+        gui.hideNextLevelButton();
+        gui.setBlueprintImage(gameState.getCurrentBlueprint().getBlueprintType());
+        requestRender();
     }
 
     public void nextLevel() {
