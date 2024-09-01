@@ -25,9 +25,12 @@ public class Gui implements GuiNotifier {
     private JPanel panel;
     private JMenuBar menuBar;
     private JToolBar toolBar;
-    private JButton nextLevelButton;
+    private JButton nextLevelButton, checkAlignmentButton, autocompleteButton, showBlueprintButton;
     private JLabel blueprintImage;
     private JDialog blueprintImageDialog;
+    private JCheckBox  ambientLightCheckbox, diffuseLightCheckbox, specularLightCheckbox;
+
+
     private GameActuator gameActuator;
     private Map<String, JLabel> modelCount = new HashMap<>();
 
@@ -39,55 +42,61 @@ public class Gui implements GuiNotifier {
     }
 
     private void initUI(InputListener inputListener) {
+        initMenuBar();
+        initToolBar();
+        initPanel(inputListener);
+    }
+
+    @Override
+    public void notify(String message, String reason, int jOptionPane) {
+        JOptionPane.showMessageDialog(frame, message, reason, jOptionPane);
+    }
+
+    private void initMenuBar() {
         menuBar = new JMenuBar();
         menuBar.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         JMenu fileMenu = new JMenu("File");
 
-        JMenuItem newGameItem = new JMenuItem("New Game");
-        JMenuItem exitItem = new JMenuItem("Exit");
+        JMenuItem newGame = new JMenuItem("New Game");
+        JMenuItem exitGame = new JMenuItem("Exit");
 
-        fileMenu.add(newGameItem);
-        fileMenu.add(exitItem);
+
+        fileMenu.add(newGame);
+        fileMenu.add(exitGame);
         menuBar.add(fileMenu);
+    }
 
-
-        JButton checkAlignmentButton = new JButton("Check Alignment");
-        JButton autocompleteButton = new JButton("Autocomplete");
-
+    private void initToolBar() {
         toolBar = new JToolBar();
-        toolBar.add(checkAlignmentButton);
-        toolBar.add(autocompleteButton);
         toolBar.setFloatable(false);
         toolBar.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-
-        autocompleteButton.addActionListener(e -> {
-            gameActuator.startAutocomplete();
-        });
-
-        checkAlignmentButton.addActionListener(e -> {
-            boolean aligned = gameActuator.checkAlignment();
-            JOptionPane.showMessageDialog(frame,
-                    aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned, or textures are incorrect",
-                    "Alignment Check",
-                    aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
-        });
-
-
-        JButton showBlueprintButton = new JButton("Show Blueprint");
         blueprintImage = new JLabel();
-        showBlueprintButton.addActionListener(e -> showFullSizeImage());
-        toolBar.add(showBlueprintButton);
+        checkAlignmentButton = new JButton("Check Alignment");
+        autocompleteButton = new JButton("Autocomplete");
+        showBlueprintButton = new JButton("Show Blueprint");
 
 
         nextLevelButton = new JButton("Next Level");
-        nextLevelButton.addActionListener(e -> gameActuator.nextLevel());
         nextLevelButton.setVisible(false);
+
+
+        autocompleteButton.addActionListener(e -> gameActuator.startAutocomplete());
+        checkAlignmentButton.addActionListener(e -> checkAlignment());
+        showBlueprintButton.addActionListener(e -> showFullSizeImage());
+        nextLevelButton.addActionListener(e -> gameActuator.nextLevel());
+
+
+        toolBar.add(checkAlignmentButton);
+        toolBar.add(autocompleteButton);
+        toolBar.add(showBlueprintButton);
         toolBar.add(nextLevelButton);
+    }
+
+    private void initPanel(InputListener inputListener) {
 
         panel = new JPanel(new GridLayout(1, 2, 10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-
 
         JPanel cuboid = createPanel(resizeImage(createImagePath(IMAGE_PATH, ShapeType.CUBOID),
                 150, 150), inputListener, ShapeType.CUBOID.name());
@@ -141,11 +150,13 @@ public class Gui implements GuiNotifier {
         return panel;
     }
 
-    @Override
-    public void notify(String message, String reason, int jOptionPane) {
-        JOptionPane.showMessageDialog(frame, message, reason, jOptionPane);
+    private void checkAlignment() {
+        boolean aligned = gameActuator.checkAlignment();
+        JOptionPane.showMessageDialog(frame,
+                aligned ? "All models are aligned with the blueprint!" : "Some models are not aligned, or textures are incorrect",
+                "Alignment Check",
+                aligned ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.WARNING_MESSAGE);
     }
-
 
     public void updateModelCount() {
         for (ShapeType type : ShapeType.values()) {
@@ -153,6 +164,7 @@ public class Gui implements GuiNotifier {
             modelCount.get(type.name()).setText(Long.toString(count));
         }
     }
+
     private void showFullSizeImage() {
         JLabel imageLabel = new JLabel();
         if (blueprintImageDialog == null) {

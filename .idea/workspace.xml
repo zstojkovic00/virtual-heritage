@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="add new blueprint">
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/table.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/resources/images/tree.png" afterDir="false" />
+    <list default="true" id="6d36095c-e011-45b8-9d95-34254591b1cb" name="Changes" comment="remove blueprint when alignment check is true">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/core/GameActuator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/Light.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/graphics/model/Background.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zeljko/ui/Gui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,42 +39,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.OpenGLSquare.executor": "Run",
-    "Application.OpenGLTriangle.executor": "Run",
-    "Application.Project.executor": "Run",
-    "Application.com.zeljko.Main.executor": "Run",
-    "Application.ogl2.exam.Project.executor": "Run",
-    "JUnit.AlignmentCheckerTest.executor": "Run",
-    "JUnit.AlignmentCheckerTest.testAllModelsAligned.executor": "Run",
-    "JUnit.AlignmentCheckerTest.testMisalignedModel.executor": "Run",
-    "JUnit.BlueprintTest.executor": "Run",
-    "JUnit.BlueprintTest.testAllModelsAligned.executor": "Debug",
-    "JUnit.BlueprintTest.testModelFullyAligned.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.LegoBuilder [clean,install].executor": "Run",
-    "Maven.lego-builder [clean,install].executor": "Run",
-    "Maven.virtual-heritage [clean,install].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OpenGLSquare.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OpenGLTriangle.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Project.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.zeljko.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ogl2.exam.Project.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.testAllModelsAligned.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AlignmentCheckerTest.testMisalignedModel.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BlueprintTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BlueprintTest.testAllModelsAligned.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.BlueprintTest.testModelFullyAligned.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LegoBuilder [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lego-builder [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.virtual-heritage [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/zstojkovic00/IdeaProjects/lego-builder/src/main/java/resources/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.zeljko.lego.graphics" />
@@ -119,9 +119,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-1.8.0_402-corretto-1.8.0_402-4caba194b151-a39a91d7" />
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-25a4bffe" />
-        <option value="jdk-21.0.2-temurin-21.0.2-4caba194b151-51f4b930" />
+        <option value="jdk-1.8.0_392-corretto-1.8.0_392-3183f394aec4-cb300fc7" />
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
       </set>
     </attachedChunks>
   </component>
@@ -159,6 +158,8 @@
       <workItem from="1725047910345" duration="10804000" />
       <workItem from="1725062924765" duration="6000" />
       <workItem from="1725104410669" duration="3565000" />
+      <workItem from="1725196838184" duration="3941000" />
+      <workItem from="1725212869014" duration="665000" />
     </task>
     <task id="LOCAL-00001" summary="Initial working version">
       <option name="closed" value="true" />
