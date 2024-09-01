@@ -96,6 +96,26 @@ public class GameActuator implements GLEventListener {
         camera.setupProjection(gl);
         camera.applyViewTransform(gl);
 
+        float[] zero = {0, 0, 0, 1};
+        light.applyLighting(gl, zero);
+
+        // turn on the global ambient light
+        if(gui.getGlobalAmbientLight().isSelected()){ // if it's checked
+            gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT,
+                    new float[] {0.2F, 0.2F, 0.2F, 1},
+                    0);
+
+        }else{
+            gl.glLightModelfv(GL2.GL_LIGHT_MODEL_AMBIENT,
+                    zero,
+                    0);
+        }
+
+        // add a specular light to make the object shiny
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK,
+                GL2.GL_SPECULAR,
+                new float[] {0.2F, 0.2F, 0.2F, 1}, 0);
+
         if (gameState.getCurrentBlueprint() != null) {
             renderer.renderScene(gl, gameState);
         }
@@ -131,6 +151,14 @@ public class GameActuator implements GLEventListener {
         } else {
             gui.showAllLevelCompleteMessage();
         }
+    }
+
+    public void updateLighting() {
+        light.setLightOnOff(gui.getLightOnOff().isSelected());
+        light.setAmbientLightOn(gui.getAmbientLight().isSelected());
+        light.setDiffuseLightOn(gui.getDiffuseLight().isSelected());
+        light.setSpecularLightOn(gui.getSpecularLight().isSelected());
+        requestRender();
     }
 
     public void requestRender() {

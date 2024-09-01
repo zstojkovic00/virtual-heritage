@@ -28,7 +28,7 @@ public class Gui implements GuiNotifier {
     private JButton nextLevelButton, checkAlignmentButton, autocompleteButton, showBlueprintButton;
     private JLabel blueprintImage;
     private JDialog blueprintImageDialog;
-    private JCheckBox  ambientLightCheckbox, diffuseLightCheckbox, specularLightCheckbox;
+    private JCheckBox  lightOnOff, globalAmbientLight, ambientLight, diffuseLight, specularLight;
 
 
     private GameActuator gameActuator;
@@ -69,28 +69,49 @@ public class Gui implements GuiNotifier {
     private void initToolBar() {
         toolBar = new JToolBar();
         toolBar.setFloatable(false);
-        toolBar.setLayout(new FlowLayout(FlowLayout.CENTER));
+        toolBar.setLayout(new BoxLayout(toolBar, BoxLayout.Y_AXIS));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel lightPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         blueprintImage = new JLabel();
         checkAlignmentButton = new JButton("Check Alignment");
         autocompleteButton = new JButton("Autocomplete");
         showBlueprintButton = new JButton("Show Blueprint");
 
+        lightOnOff = new JCheckBox("Turn Light On/Off", true);
+        ambientLight = new JCheckBox("Ambient Light", false);
+        globalAmbientLight = new JCheckBox("Global Ambient Light", false);
+        specularLight = new JCheckBox("Specular Light", false);
+        diffuseLight = new JCheckBox("Diffuse Light", false);
 
         nextLevelButton = new JButton("Next Level");
         nextLevelButton.setVisible(false);
-
 
         autocompleteButton.addActionListener(e -> gameActuator.startAutocomplete());
         checkAlignmentButton.addActionListener(e -> checkAlignment());
         showBlueprintButton.addActionListener(e -> showFullSizeImage());
         nextLevelButton.addActionListener(e -> gameActuator.nextLevel());
 
+        lightOnOff.addActionListener(e -> gameActuator.updateLighting());
+        ambientLight.addActionListener(e -> gameActuator.updateLighting());
+        globalAmbientLight.addActionListener(e -> gameActuator.updateLighting());
+        specularLight.addActionListener(e -> gameActuator.updateLighting());
+        diffuseLight.addActionListener(e -> gameActuator.updateLighting());
 
-        toolBar.add(checkAlignmentButton);
-        toolBar.add(autocompleteButton);
-        toolBar.add(showBlueprintButton);
-        toolBar.add(nextLevelButton);
+        buttonPanel.add(checkAlignmentButton);
+        buttonPanel.add(autocompleteButton);
+        buttonPanel.add(showBlueprintButton);
+        buttonPanel.add(nextLevelButton);
+
+        lightPanel.add(lightOnOff);
+        lightPanel.add(ambientLight);
+        lightPanel.add(globalAmbientLight);
+        lightPanel.add(specularLight);
+        lightPanel.add(diffuseLight);
+
+        toolBar.add(buttonPanel);
+        toolBar.add(lightPanel);
     }
 
     private void initPanel(InputListener inputListener) {
