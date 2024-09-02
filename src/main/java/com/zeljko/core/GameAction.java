@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static jogamp.opengl.glu.nurbs.Knotvector.TOLERANCE;
+import static com.zeljko.utils.Constants.TOLERANCE;
 
 public class GameAction {
 

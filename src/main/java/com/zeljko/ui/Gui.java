@@ -251,7 +251,7 @@ public class Gui implements GuiNotifier {
             JScrollPane scrollPane = new JScrollPane(imageLabel);
             blueprintImageDialog.add(scrollPane);
 
-            blueprintImageDialog.setSize(450, 450);
+            blueprintImageDialog.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
             blueprintImageDialog.setLocationRelativeTo(frame);
         }
 
@@ -267,7 +267,8 @@ public class Gui implements GuiNotifier {
         String imagePath = createImagePath(IMAGE_PATH, type);
         ImageIcon icon = new ImageIcon(imagePath);
         if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
-            Image image = icon.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+            Image image = icon.getImage().getScaledInstance(WINDOW_WIDTH - 200,
+                    WINDOW_HEIGHT -100, Image.SCALE_SMOOTH);
             blueprintImage.setIcon(new ImageIcon(image));
         } else {
             System.out.println("Failed to load image: " + imagePath);

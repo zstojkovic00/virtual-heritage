@@ -8,7 +8,7 @@ public class Constants {
     public static int WINDOW_WIDTH = 1000;
     public static int WINDOW_HEIGHT = 562;
 
-    private static final double TOLERANCE = 0.1;
+    public static final double TOLERANCE = 0.1;
     public static final float UNIT_MOVEMENT = 0.1F;
 
     public static final double ROTATION_SPEED = 0.1;
